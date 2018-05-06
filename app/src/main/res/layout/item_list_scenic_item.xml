@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="120dp"
+    android:paddingEnd="2dp"
+    android:paddingStart="2dp">
+
+    <ImageView
+        android:id="@+id/item_scenic_image"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="1dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/item_scenic_title"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="1dp"
+        android:background="#88000000"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/item_scenic_tips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/shape_bg_scenic_tips"
+        android:padding="3dp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+
+</FrameLayout>

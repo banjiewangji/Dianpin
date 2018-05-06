@@ -1,0 +1,48 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Style_Scrollable">
+        <item name="android:fadingEdge">none</item>
+        <item name="android:cacheColorHint">#00000000</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:overScrollMode" tools:targetApi="9">never</item>
+    </style>
+
+    <style name="Line_Vertical">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#ffe9e8eb</item>
+    </style>
+
+    <style name="AppButton" parent="@style/Widget.AppCompat.Button">
+        <item name="android:minHeight">20dp</item>
+        <item name="android:gravity">center</item>
+        <!--去除阴影-->
+        <item name="elevation">0dp</item>
+        <item name="android:translationZ" tools:targetApi="lollipop">0dp</item>
+        <item name="android:stateListAnimator" tools:targetApi="lollipop">@null</item>
+        <!--重写 最小宽度，系统给的太大-->
+        <item name="android:minWidth">20dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="AppButton.B7.Typ1" parent="AppButton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/md_button_blue_small_corner</item>
+        <item name="android:textColor">@color/md_button_text_white</item>
+        <item name="android:paddingLeft">50dp</item>
+        <item name="android:paddingRight">50dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+</resources>

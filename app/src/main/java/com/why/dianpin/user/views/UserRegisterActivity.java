@@ -195,7 +195,6 @@ public class UserRegisterActivity extends BaseActivity implements View.OnClickLi
                             finish();
                         } else {
                             Toaster.show("注册失败");
-
                         }
                     }
 

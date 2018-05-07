@@ -1,5 +1,6 @@
 package com.why.dianpin.home.holder;
 
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -8,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.home.beans.ScenicItem;
+import com.why.dianpin.scenic.views.ScenicListActivity;
 
 import java.util.List;
 
@@ -101,90 +102,7 @@ public class ScenicItemHolder extends MainItemHolder<ScenicItem> implements View
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.item_header_all) {
-            Toast.makeText(mContext, "查看全部", Toast.LENGTH_SHORT).show();
+            mContext.startActivity(new Intent(mContext, ScenicListActivity.class));
         }
     }
-//
-//    private static class ScenicAdapter extends ArrayAdapter<Scenic> {
-//
-//        private List<Scenic> mData = new ArrayList<>();
-//
-//        private final LayoutInflater mInflater;
-//
-//        public ScenicAdapter(Context context) {
-//            super(context, 0);
-//            mInflater = LayoutInflater.from(context);
-//        }
-//
-//        private void setData(List<Scenic> data) {
-//            if (!mData.isEmpty()) {
-//                mData.clear();
-//            }
-//            if (data != null && !data.isEmpty()) {
-//                mData.addAll(data);
-//            }
-//            notifyDataSetChanged();
-//        }
-//
-//        @Nullable
-//        @Override
-//        public Scenic getItem(int position) {
-//            return position >= mData.size() ? null : mData.get(position);
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return mData.size();
-//        }
-//
-//        @NonNull
-//        @Override
-//        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-//            ScenicViewHolder holder;
-//            if (convertView == null) {
-//                convertView = mInflater.inflate(R.layout.item_list_scenic_item, parent, false);
-//                holder = new ScenicViewHolder(convertView);
-//                convertView.setTag(holder);
-//            } else {
-//                holder = (ScenicViewHolder) convertView.getTag();
-//            }
-//            holder.setData(getItem(position), position);
-//            return convertView;
-//        }
-//    }
-//
-//    private static class ScenicViewHolder extends RecyclerView.ViewHolder {
-//
-//
-//        private final ImageView mImage;
-//        private final TextView mTips;
-//        private final TextView mTitle;
-//
-//        private ScenicViewHolder(View itemView) {
-//            super(itemView);
-//            mImage = findView(itemView, R.id.item_scenic_image);
-//            mTips = findView(itemView, R.id.item_scenic_tips);
-//            mTitle = findView(itemView, R.id.item_scenic_title);
-//
-//        }
-//
-//        private void setData(Scenic scenic, int position) {
-//            if (scenic == null) {
-//                return;
-//            }
-//            mImage.setImageResource(scenic.icon);
-//            mTitle.setText(scenic.title);
-//            if (position < 3) {
-//                GradientDrawable bg = (GradientDrawable) mTips.getBackground();
-//                bg = (GradientDrawable) bg.mutate();
-//                bg.setColor(TIPS_BG_COLOR[position]);
-//                mTips.setBackgroundDrawable(bg);
-//
-//                mTips.setVisibility(View.VISIBLE);
-//                mTips.setText("TOP." + (position + 1));
-//            } else {
-//                mTips.setVisibility(View.GONE);
-//            }
-//        }
-//    }
 }

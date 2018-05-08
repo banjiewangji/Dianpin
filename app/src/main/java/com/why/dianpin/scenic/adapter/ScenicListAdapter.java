@@ -24,6 +24,7 @@ public class ScenicListAdapter extends RecyclerView.Adapter<ScenicListItemHolder
     public void setData(List<ScenicListBean> data) {
         mData.clear();
         mData.addAll(data);
+        notifyDataSetChanged();
     }
 
     @Override

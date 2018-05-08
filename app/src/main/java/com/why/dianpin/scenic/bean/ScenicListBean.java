@@ -21,7 +21,7 @@ public class ScenicListBean {
     public ScenicListBean() {
     }
 
-    public ScenicListBean(String title, String subTitle, String imageUrl, int priority, String rating, float star, int commentCount, String location) {
+    public ScenicListBean(String title, String subTitle, String imageUrl, int priority, String rating, double star, int commentCount, String location) {
         this.title = title;
         this.subTitle = subTitle;
         this.imageUrl = imageUrl;
@@ -34,6 +34,9 @@ public class ScenicListBean {
 
     public static ScenicListBean fromJson(JSONObject json) {
         final ScenicListBean bean = new ScenicListBean();
+        if (json == null) {
+            return bean;
+        }
         bean.title = json.optString("title");
         bean.subTitle = json.optString("subTitle");
         bean.imageUrl = json.optString("imageUrl");

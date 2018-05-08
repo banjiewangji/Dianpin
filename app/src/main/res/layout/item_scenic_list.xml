@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:background="#FFFFFFFF"
     android:orientation="vertical"
-    android:paddingBottom="10dp">
+    android:paddingBottom="15dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -13,7 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
 
         <TextView
@@ -28,7 +29,7 @@
             tools:text="故宫博物院" />
 
         <TextView
-            android:id="@+id/item_scenic_list_ranking"
+            android:id="@+id/item_scenic_list_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
@@ -75,7 +76,7 @@
             android:id="@+id/item_scenic_list_grade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="4dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/colorPrimary"
@@ -85,17 +86,15 @@
             android:id="@+id/item_scenic_list_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@android:color/darker_gray"
-            tools:text="  |  12254人评价" />
+            tools:text="| 12254人评价" />
 
         <TextView
             android:id="@+id/item_scenic_list_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:ellipsize="end"

@@ -5,13 +5,23 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.why.dianpin.R;
+import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.scenic.adapter.ScenicListAdapter;
+import com.why.dianpin.scenic.bean.ScenicListBean;
+import com.why.dianpin.util.HttpUtil;
+import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * @author shidefeng
@@ -55,6 +65,38 @@ public class ScenicListActivity extends BaseActivity {
     }
 
     private void initData() {
+//        HttpUtil.create("scenic/getScenicList")
+//                .addParameter("pageNum", 3)
+//                .get(new HttpUtil.HttpCallback() {
+//                    @Override
+//                    public void onSuccess(JSONObject result) {
+//                        final JSONArray scenicList = result.optJSONArray("scenicList");
+//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
+//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(String message) {
+//                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
+//                    }
+//                });
 
+        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+        beans.add(getScenic());
+        beans.add(getScenic());
+        beans.add(getScenic());
+        beans.add(getScenic());
+        beans.add(getScenic());
+
+        mAdapter.setData(beans);
+    }
+
+    public ScenicListBean getScenic() {
+        return new ScenicListBean("故宫博物院"
+                , "井壁辉煌风干肉给他告诉她是否收入输入"
+                , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
+                , 1, "5A", 4.6, 124, "东城区");
     }
 }

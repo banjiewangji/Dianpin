@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 public class ScenicListBean {
 
+    public int id;              // id标识
     public String title;        // 标题
     public String subTitle;     // 副标题
     public String imageUrl;     // 封面
@@ -21,7 +22,8 @@ public class ScenicListBean {
     public ScenicListBean() {
     }
 
-    public ScenicListBean(String title, String subTitle, String imageUrl, int priority, String rating, double star, int commentCount, String location) {
+    public ScenicListBean(int id, String title, String subTitle, String imageUrl, int priority, String rating, double star, int commentCount, String location) {
+        this.id = id;
         this.title = title;
         this.subTitle = subTitle;
         this.imageUrl = imageUrl;
@@ -37,6 +39,7 @@ public class ScenicListBean {
         if (json == null) {
             return bean;
         }
+        bean.id = json.optInt("id");
         bean.title = json.optString("title");
         bean.subTitle = json.optString("subTitle");
         bean.imageUrl = json.optString("imageUrl");

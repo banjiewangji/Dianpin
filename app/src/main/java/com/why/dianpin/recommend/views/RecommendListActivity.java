@@ -1,4 +1,4 @@
-package com.why.dianpin.scenic.views;
+package com.why.dianpin.recommend.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.why.dianpin.R;
-import com.why.dianpin.home.beans.Scenic;
+import com.why.dianpin.recommend.adapter.RecommendListAdapter;
+import com.why.dianpin.recommend.bean.RecommendListBean;
 import com.why.dianpin.scenic.adapter.ScenicListAdapter;
 import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.util.HttpUtil;
@@ -28,10 +29,10 @@ import java.util.ArrayList;
  * @since 2018/5/7.
  */
 
-public class ScenicListActivity extends BaseActivity {
+public class RecommendListActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
-    private ScenicListAdapter mAdapter;
+    private RecommendListAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class ScenicListActivity extends BaseActivity {
 
     private void initEvent() {
         ToolbarHelper toolbarHelper = new ToolbarHelper((Toolbar) findViewById(R.id.tool_bar));
-        toolbarHelper.setTitle("必去景点排行");
+        toolbarHelper.setTitle("出行推荐");
         toolbarHelper.setBackgroundColorRes(R.color.colorPrimary);
         toolbarHelper.setNavigation(R.drawable.ic_arrow_back, new View.OnClickListener() {
             @Override
@@ -59,31 +60,31 @@ public class ScenicListActivity extends BaseActivity {
             }
         });
 
-        mAdapter = new ScenicListAdapter();
+        mAdapter = new RecommendListAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initData() {
-//        HttpUtil.create("scenic/getScenicList")
-//                .addParameter("pageNum", 3)
-//                .get(new HttpUtil.HttpCallback() {
-//                    @Override
-//                    public void onSuccess(JSONObject result) {
-//                        final JSONArray scenicList = result.optJSONArray("scenicList");
-//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
-//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(String message) {
-//                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
-//                    }
-//                });
+        HttpUtil.create("recommend/getRecommendList")
+                .addParameter("pageNum", 3)
+                .get(new HttpUtil.HttpCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        final JSONArray scenicList = result.optJSONArray("scenicList");
+                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+                        for (int i = 0, len = scenicList.length(); i < len; i++) {
+                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
+                        }
+                    }
 
-        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+                    @Override
+                    public void onError(String message) {
+                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
+                    }
+                });
+
+        final ArrayList<RecommendListBean> beans = new ArrayList<>();
         beans.add(getScenic());
         beans.add(getScenic());
         beans.add(getScenic());
@@ -93,10 +94,11 @@ public class ScenicListActivity extends BaseActivity {
         mAdapter.setData(beans);
     }
 
-    public ScenicListBean getScenic() {
-        return new ScenicListBean(3, "故宫博物院"
-                , "井壁辉煌风干肉给他告诉她是否收入输入"
+    public RecommendListBean getScenic() {
+        return new RecommendListBean(3
+                , "故宫博物馆"
+                , "黄琉璃瓦顶、青白实底座，饰以金壁辉煌的油画"
                 , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
-                , 1, "5A", 4.6, 124, "东城区");
+                , 323424);
     }
 }

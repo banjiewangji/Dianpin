@@ -53,7 +53,7 @@
             android:name=".user.views.UserLoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-
+        <!-- 用户信息 -->
         <activity
             android:name=".user.views.UserRegisterActivity"
             android:screenOrientation="portrait"
@@ -63,8 +63,22 @@
             android:name=".location.LocationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <!-- 出行推荐 -->
+        <activity
+            android:name=".recommend.views.RecommendListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 必去景点 -->
         <activity
             android:name=".scenic.views.ScenicListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <!-- 游记 -->
+        <activity
+            android:name=".travel.views.TravelListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

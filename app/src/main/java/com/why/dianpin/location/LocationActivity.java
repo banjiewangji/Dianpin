@@ -3,7 +3,9 @@ package com.why.dianpin.location;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -17,6 +19,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.view.BaseActivity;
 import com.why.dianpin.R;
 
@@ -46,6 +49,16 @@ public class LocationActivity extends BaseActivity implements AMap.OnMapClickLis
     }
 
     private void init() {
+        ToolbarHelper toolbarHelper = new ToolbarHelper((Toolbar) findViewById(R.id.tool_bar));
+        toolbarHelper.setTitle("地图");
+        toolbarHelper.setBackgroundColorRes(R.color.colorPrimary);
+        toolbarHelper.setNavigation(R.drawable.ic_arrow_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         if (mAMap == null) {
             mAMap = mMapView.getMap();
             mAMap.getUiSettings().setRotateGesturesEnabled(false);

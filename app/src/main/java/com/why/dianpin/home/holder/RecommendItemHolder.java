@@ -1,5 +1,6 @@
 package com.why.dianpin.home.holder;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Recommend;
 import com.why.dianpin.home.beans.RecommendItem;
+import com.why.dianpin.recommend.views.RecommendListActivity;
 import com.why.dianpin.util.HttpUtil;
 
 import java.util.ArrayList;
@@ -52,7 +54,7 @@ public class RecommendItemHolder extends MainItemHolder<RecommendItem> {
         mHeaderAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                HttpUtil.get();
+                mContext.startActivity(new Intent(mContext, RecommendListActivity.class));
             }
         });
 

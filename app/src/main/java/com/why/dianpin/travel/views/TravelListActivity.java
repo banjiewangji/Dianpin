@@ -1,25 +1,22 @@
-package com.why.dianpin.scenic.views;
+package com.why.dianpin.travel.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.why.dianpin.R;
-import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.scenic.adapter.ScenicListAdapter;
 import com.why.dianpin.scenic.bean.ScenicListBean;
-import com.why.dianpin.util.HttpUtil;
+import com.why.dianpin.travel.adapter.TravelListAdapter;
+import com.why.dianpin.travel.bean.TravelListBean;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -28,16 +25,16 @@ import java.util.ArrayList;
  * @since 2018/5/7.
  */
 
-public class ScenicListActivity extends BaseActivity {
+public class TravelListActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
-    private ScenicListAdapter mAdapter;
+    private TravelListAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_scenic_list);
+        setContentView(R.layout.layout_travel_list);
 
         initViews();
         initEvent();
@@ -50,16 +47,28 @@ public class ScenicListActivity extends BaseActivity {
 
     private void initEvent() {
         ToolbarHelper toolbarHelper = new ToolbarHelper((Toolbar) findViewById(R.id.tool_bar));
-        toolbarHelper.setTitle("必去景点排行");
+        toolbarHelper.setTitle("游记");
         toolbarHelper.setBackgroundColorRes(R.color.colorPrimary);
+        toolbarHelper.addRightMenu(R.id.menu_travel_publish_id, "", R.drawable.ic_add);
         toolbarHelper.setNavigation(R.drawable.ic_arrow_back, new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
 
-        mAdapter = new ScenicListAdapter();
+        toolbarHelper.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.menu_travel_publish_id) {
+                    Toaster.show("fucker");
+                }
+                return false;
+            }
+        });
+
+        mAdapter = new TravelListAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -83,7 +92,7 @@ public class ScenicListActivity extends BaseActivity {
 //                    }
 //                });
 
-        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+        final ArrayList<TravelListBean> beans = new ArrayList<>();
         beans.add(getScenic());
         beans.add(getScenic());
         beans.add(getScenic());
@@ -93,10 +102,9 @@ public class ScenicListActivity extends BaseActivity {
         mAdapter.setData(beans);
     }
 
-    public ScenicListBean getScenic() {
-        return new ScenicListBean(3, "故宫博物院"
-                , "井壁辉煌风干肉给他告诉她是否收入输入"
+    public TravelListBean getScenic() {
+        return new TravelListBean(1, "精华", "傅红雪", "故宫博物院"
                 , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
-                , 1, "5A", 4.6, 124, "东城区");
+                , 453, 344555, 124, 4, "东城区");
     }
 }

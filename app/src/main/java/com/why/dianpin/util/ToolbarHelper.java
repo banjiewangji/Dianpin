@@ -5,6 +5,8 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 /**
@@ -56,5 +58,26 @@ public class ToolbarHelper {
 
     public void setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener listener) {
         mToolbar.setOnMenuItemClickListener(listener);
+    }
+
+    /**
+     * 在Toolbar右边增加菜单按钮,按钮的点击事件在 {@link Toolbar.OnMenuItemClickListener} 中处理
+     *
+     * @param itemId
+     * @param itemText
+     * @param iconResId 按钮图标
+     */
+    public MenuItem addRightMenu(int itemId, CharSequence itemText, @DrawableRes int iconResId) {
+        if (mToolbar != null) {
+            Menu menu = mToolbar.getMenu();
+            itemId = itemId == 0 ? Menu.NONE : itemId;
+            MenuItem item = menu.add(Menu.NONE, itemId, Menu.NONE, itemText);
+            if (iconResId > 0) {
+                item.setIcon(iconResId);
+            }
+            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+            return item;
+        }
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.why.dianpin.home.holder;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Travels;
 import com.why.dianpin.home.beans.TravelsItem;
+import com.why.dianpin.travel.views.TravelListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
         mHeaderAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mContext.startActivity(new Intent(mContext, TravelListActivity.class));
             }
         });
 

@@ -63,6 +63,11 @@
             android:layout_height="match_parent"
             android:scrollbars="none" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/shape_border_bg" />
+
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>

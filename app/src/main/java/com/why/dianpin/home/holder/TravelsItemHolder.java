@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Travels;
 import com.why.dianpin.home.beans.TravelsItem;
+import com.why.dianpin.home.listener.MainItemClickListener;
+import com.why.dianpin.travel.views.TravelDetailActivity;
 import com.why.dianpin.travel.views.TravelListActivity;
 
 import java.util.ArrayList;
@@ -62,6 +64,7 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
 
     private static class TravelsViewHolder {
 
+        private final View itemView;
         private final TextView mTips;
         private final ImageView mImage;
         private final TextView mContent;
@@ -69,6 +72,7 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
 
         private TravelsViewHolder(View itemView) {
 
+            this.itemView = itemView;
             mTips = findView(itemView, R.id.tv_travels_tips);
             mImage = findView(itemView, R.id.iv_travels_image);
             mContent = findView(itemView, R.id.tv_travels_content);
@@ -83,6 +87,13 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
             mImage.setImageResource(travels.image);
             mContent.setText(travels.content);
             mDesc.setText(travels.desc);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemView.getContext().startActivity(new Intent(itemView.getContext(), TravelDetailActivity.class));
+                }
+            });
         }
     }
 }

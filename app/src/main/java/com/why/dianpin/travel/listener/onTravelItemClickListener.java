@@ -1,6 +1,6 @@
 package com.why.dianpin.travel.listener;
 
-import com.why.dianpin.travel.bean.TravelListBean;
+import com.why.dianpin.travel.bean.TravelBean;
 
 /**
  * @author shidefeng
@@ -9,6 +9,6 @@ import com.why.dianpin.travel.bean.TravelListBean;
 
 public interface onTravelItemClickListener {
 
-    void onItemClick(TravelListBean bean);
+    void onItemClick(TravelBean bean);
 
 }

@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.why.dianpin.R;
-import com.why.dianpin.travel.bean.TravelListBean;
+import com.why.dianpin.travel.bean.TravelBean;
 import com.why.dianpin.travel.holder.TravelListItemHolder;
 
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ import java.util.List;
 
 public class TravelListAdapter extends RecyclerView.Adapter<TravelListItemHolder> {
 
-    private List<TravelListBean> mData = new ArrayList<>();
+    private List<TravelBean> mData = new ArrayList<>();
 
-    public void setData(List<TravelListBean> data) {
+    public void setData(List<TravelBean> data) {
         mData.clear();
         mData.addAll(data);
         notifyDataSetChanged();
@@ -39,7 +39,7 @@ public class TravelListAdapter extends RecyclerView.Adapter<TravelListItemHolder
             return;
         }
 
-        TravelListBean bean = mData.get(position);
+        TravelBean bean = mData.get(position);
         holder.setData(bean);
     }
 

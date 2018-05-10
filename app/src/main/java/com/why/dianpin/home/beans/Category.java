@@ -10,11 +10,11 @@ import android.graphics.drawable.Drawable;
 public class Category {
 
     public static final int TYPE_SCENIC = 1;
-    public static final int TYPE_HOTEL = 2;
-    public static final int TYPE_ONE_DAY = 3;
-    public static final int TYPE_FOOD = 4;
-    public static final int TYPE_PLANE = 5;
-    public static final int TYPE_NEARBY = 6;
+    public static final int TYPE_RECOMMEND = 2;
+    public static final int TYPE_QUESTION = 3;
+    public static final int TYPE_MAP = 4;
+    public static final int TYPE_TRAVEL = 5;
+    public static final int TYPE_LIKE = 6;
 
     public int type;
     public Drawable icon;

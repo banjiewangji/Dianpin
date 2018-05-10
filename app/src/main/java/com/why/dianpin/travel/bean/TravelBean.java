@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * @since 2018/5/7.
  */
 
-public class TravelListBean {
+public class TravelBean {
 
     public int id;              // id标识
     public String tags;         // 精华、热门等标签
@@ -20,10 +20,10 @@ public class TravelListBean {
     public long duration;       // 旅行天数
     public String team;         // 同伴
 
-    public TravelListBean() {
+    public TravelBean() {
     }
 
-    public TravelListBean(int id, String tags, String author, String title, String imageUrl, int seeCount, long beginTime, long createTime, long duration, String team) {
+    public TravelBean(int id, String tags, String author, String title, String imageUrl, int seeCount, long beginTime, long createTime, long duration, String team) {
         this.id = id;
         this.tags = tags;
         this.author = author;
@@ -36,8 +36,8 @@ public class TravelListBean {
         this.team = team;
     }
 
-    public static TravelListBean fromJson(JSONObject json) {
-        final TravelListBean bean = new TravelListBean();
+    public static TravelBean fromJson(JSONObject json) {
+        final TravelBean bean = new TravelBean();
         if (json == null) {
             return bean;
         }

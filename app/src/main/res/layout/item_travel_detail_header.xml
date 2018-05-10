@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/item_travel_detail_header_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_app_bar_bg" />
+
+        <TextView
+            android:id="@+id/item_travel_detail_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:lineSpacingMultiplier="1.2"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/white"
+            android:shadowColor="#44000000"
+            android:shadowRadius="4"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="精华" />
+
+        <TextView
+            android:id="@+id/item_travel_detail_header_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:shadowColor="#77000000"
+            android:shadowRadius="3"
+            android:textColor="@android:color/white" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:padding="7dp">
+
+        <TextView
+            android:id="@+id/item_travel_detail_header_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="3"
+            tools:text="日期\n\n2018/02/19" />
+
+        <TextView
+            android:id="@+id/item_travel_detail_header_duration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="3"
+            tools:text="天数\n\n4" />
+
+        <TextView
+            android:id="@+id/item_travel_detail_header_team"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:maxLines="3"
+            tools:text="同伴\n\n小两口" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/shape_border_bg" />
+
+</LinearLayout>

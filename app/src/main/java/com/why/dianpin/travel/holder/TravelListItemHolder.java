@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
-import com.why.dianpin.travel.bean.TravelListBean;
+import com.why.dianpin.travel.bean.TravelBean;
 import com.why.dianpin.util.UIUtils;
 
 /**
@@ -34,7 +34,7 @@ public class TravelListItemHolder extends RecyclerView.ViewHolder {
         mTail = UIUtils.findView(itemView, R.id.item_travel_list_tail);
     }
 
-    public void setData(TravelListBean bean) {
+    public void setData(TravelBean bean) {
         if (bean == null) {
           return;
         }

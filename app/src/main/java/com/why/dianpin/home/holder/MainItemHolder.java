@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.why.dianpin.home.beans.IMainListItem;
+import com.why.dianpin.home.listener.MainItemClickListener;
 
 /**
  * @author shidefeng
@@ -19,6 +20,7 @@ import com.why.dianpin.home.beans.IMainListItem;
 public abstract class MainItemHolder<T extends IMainListItem> extends RecyclerView.ViewHolder {
 
     Context mContext;
+    protected MainItemClickListener mListener;
 
     MainItemHolder(@NonNull ViewGroup parent, @LayoutRes int layoutId) {
         super(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false));
@@ -38,5 +40,10 @@ public abstract class MainItemHolder<T extends IMainListItem> extends RecyclerVi
 
     }
 
+    public void setMainItemClickListener(MainItemClickListener listener) {
+        mListener = listener;
+    }
+
     public abstract void setData(T data);
+
 }

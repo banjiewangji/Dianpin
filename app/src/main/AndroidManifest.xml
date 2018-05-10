@@ -59,6 +59,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".location.LocationActivity"
             android:screenOrientation="portrait"
@@ -67,6 +68,11 @@
         <!-- 出行推荐 -->
         <activity
             android:name=".recommend.views.RecommendListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <!-- 出行推荐详情 -->
+        <activity
+            android:name=".recommend.views.RecommendDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
@@ -79,6 +85,11 @@
         <!-- 游记 -->
         <activity
             android:name=".travel.views.TravelListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <!-- 游记详情 -->
+        <activity
+            android:name=".travel.views.TravelDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

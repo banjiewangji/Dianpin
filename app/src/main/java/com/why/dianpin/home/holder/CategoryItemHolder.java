@@ -1,6 +1,7 @@
 package com.why.dianpin.home.holder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Category;
 import com.why.dianpin.home.beans.CategoryItem;
+import com.why.dianpin.location.LocationActivity;
+import com.why.dianpin.recommend.views.RecommendListActivity;
+import com.why.dianpin.scenic.views.ScenicListActivity;
+import com.why.dianpin.travel.views.TravelListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +98,7 @@ public class CategoryItemHolder extends MainItemHolder<CategoryItem> {
                 holder = (GridHolder) convertView.getTag();
             }
 
-            Category cate = mData.get(position);
+            final Category cate = mData.get(position);
             holder.title.setText(cate.title);
 
             holder.icon.setImageDrawable(cate.icon);
@@ -102,6 +107,32 @@ public class CategoryItemHolder extends MainItemHolder<CategoryItem> {
             bg = (GradientDrawable) bg.mutate();
             bg.setColor(cate.bgColor);
             holder.icon.setBackgroundDrawable(bg);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (cate.type) {
+                        case Category.TYPE_SCENIC:
+                            mContext.startActivity(new Intent(mContext, ScenicListActivity.class));
+                            break;
+                        case Category.TYPE_RECOMMEND:
+                            mContext.startActivity(new Intent(mContext, RecommendListActivity.class));
+                            break;
+                        case Category.TYPE_TRAVEL:
+                            mContext.startActivity(new Intent(mContext, TravelListActivity.class));
+                            break;
+                        case Category.TYPE_MAP:
+                            mContext.startActivity(new Intent(mContext, LocationActivity.class));
+                            break;
+                        case Category.TYPE_QUESTION:
+                            mContext.startActivity(new Intent(mContext, ScenicListActivity.class));
+                            break;
+                        case Category.TYPE_LIKE:
+                            mContext.startActivity(new Intent(mContext, ScenicListActivity.class));
+                            break;
+                    }
+                }
+            });
 
             return convertView;
         }

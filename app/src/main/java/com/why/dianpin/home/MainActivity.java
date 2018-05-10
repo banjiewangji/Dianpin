@@ -8,10 +8,8 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.why.dianpin.R;
@@ -155,12 +153,12 @@ public class MainActivity extends BaseActivity {
     private CategoryItem getCategoryItem() {
         CategoryItem cateItem = new CategoryItem();
         ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category(Category.TYPE_HOTEL, getIcon(R.drawable.vector_hotel), 0xFFFF3030, "出行推荐"));
+        categories.add(new Category(Category.TYPE_RECOMMEND, getIcon(R.drawable.vector_hotel), 0xFFFF3030, "出行推荐"));
         categories.add(new Category(Category.TYPE_SCENIC, getIcon(R.drawable.vector_scenic), 0xFF33CCFF, "景点"));
-        categories.add(new Category(Category.TYPE_FOOD, getIcon(R.drawable.vector_location_white), 0xFFF4A460, "地图"));
-        categories.add(new Category(Category.TYPE_PLANE, getIcon(R.drawable.vector_plane), 0xFF7CCD7C, "游记"));
-        categories.add(new Category(Category.TYPE_ONE_DAY, getIcon(R.drawable.vector_question), 0xFFFFB90F, "问答"));
-        categories.add(new Category(Category.TYPE_NEARBY, getIcon(R.drawable.vector_nearby), 0xFF5CACEE, "猜你喜欢"));
+        categories.add(new Category(Category.TYPE_MAP, getIcon(R.drawable.vector_location_white), 0xFFF4A460, "地图"));
+        categories.add(new Category(Category.TYPE_TRAVEL, getIcon(R.drawable.vector_plane), 0xFF7CCD7C, "游记"));
+        categories.add(new Category(Category.TYPE_QUESTION, getIcon(R.drawable.vector_question), 0xFFFFB90F, "问答"));
+        categories.add(new Category(Category.TYPE_LIKE, getIcon(R.drawable.vector_nearby), 0xFF5CACEE, "猜你喜欢"));
         cateItem.categories = categories;
         return cateItem;
     }

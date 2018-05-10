@@ -11,7 +11,6 @@ import android.view.View;
 import com.why.dianpin.R;
 import com.why.dianpin.recommend.adapter.RecommendListAdapter;
 import com.why.dianpin.recommend.bean.RecommendListBean;
-import com.why.dianpin.scenic.adapter.ScenicListAdapter;
 import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.util.HttpUtil;
 import com.why.dianpin.util.Toaster;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
  * @since 2018/5/7.
  */
 
-public class RecommendListActivity extends BaseActivity {
+public class RecommendDetailActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private RecommendListAdapter mAdapter;
@@ -38,7 +37,7 @@ public class RecommendListActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_recommend_list);
+        setContentView(R.layout.layout_scenic_list);
 
         initViews();
         initEvent();

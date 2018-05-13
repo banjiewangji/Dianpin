@@ -20,7 +20,9 @@ import java.util.Map;
 
 public class HttpUtil {
 
-    public static final String baseUrl = "http://192.168.1.14:8080/whyServlet/";
+
+    public static final String HOST = "192.168.1.11";
+    public static final String BASE_URL = "http://" + HOST + ":8080/whyServlet/";
 
     private Novate.Builder mBuilder;
 
@@ -34,7 +36,7 @@ public class HttpUtil {
         httpUtil.mBuilder = new Novate.Builder(MyApplication.getContext())
                 .connectTimeout(10)
                 .writeTimeout(15)
-                .baseUrl(baseUrl)
+                .baseUrl(BASE_URL)
                 .addCache(false)
                 .addLog(false);
 

@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.scenic.views.StarsView;
+import com.why.dianpin.util.IamgeUtils;
 import com.why.dianpin.util.UIUtils;
 
 import java.text.DecimalFormat;
@@ -60,7 +61,7 @@ public class ScenicListItemHolder extends RecyclerView.ViewHolder {
         mLocation.setText(bean.location);
 
         mStars.update(bean.grade);
-        Glide.with(itemView.getContext()).load(bean.imageUrl).into(mImage);
+        IamgeUtils.loadImage(itemView.getContext(), bean.imageUrl, mImage);
     }
 
     private float handleDecimal(double number) {

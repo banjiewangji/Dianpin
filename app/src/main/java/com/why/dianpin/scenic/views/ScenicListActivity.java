@@ -65,32 +65,34 @@ public class ScenicListActivity extends BaseActivity {
     }
 
     private void initData() {
-//        HttpUtil.create("scenic/getScenicList")
-//                .addParameter("pageNum", 3)
-//                .get(new HttpUtil.HttpCallback() {
-//                    @Override
-//                    public void onSuccess(JSONObject result) {
-//                        final JSONArray scenicList = result.optJSONArray("scenicList");
-//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
-//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-//                        }
-//                    }
+        HttpUtil.create("scenic/getScenicList")
+                .get(new HttpUtil.HttpCallback() {
+                    @Override
+                    public void onSuccess(JSONObject result) {
+                        final JSONArray scenicList = result.optJSONArray("scenics");
+                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+                        for (int i = 0, len = scenicList.length(); i < len; i++) {
+                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
+                        }
+                        if (mAdapter != null) {
+                            mAdapter.setData(beans);
+                        }
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
+                    }
+                });
+
+//        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
 //
-//                    @Override
-//                    public void onError(String message) {
-//                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
-//                    }
-//                });
-
-        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-
-        mAdapter.setData(beans);
+//        mAdapter.setData(beans);
     }
 
     public ScenicListBean getScenic() {

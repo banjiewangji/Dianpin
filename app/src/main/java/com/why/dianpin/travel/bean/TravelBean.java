@@ -19,6 +19,7 @@ public class TravelBean {
     public long createTime;     // 发帖时间
     public long duration;       // 旅行天数
     public String team;         // 同伴
+    public String detail;       // 详情
 
     public TravelBean() {
     }
@@ -51,6 +52,21 @@ public class TravelBean {
         bean.createTime = json.optLong("createTime");
         bean.duration = json.optLong("duration");
         bean.team = json.optString("team");
+        bean.team = json.optString("detail");
         return bean;
+    }
+
+    public static void copy(TravelBean dst, TravelBean src) {
+        dst.id = src.id;
+        dst.tags = src.tags;
+        dst.author = src.author;
+        dst.title = src.title;
+        dst.imageUrl = src.imageUrl;
+        dst.seeCount = src.seeCount;
+        dst.beginTime = src.beginTime;
+        dst.createTime = src.createTime;
+        dst.duration = src.duration;
+        dst.team = src.team;
+        dst.detail = src.detail;
     }
 }

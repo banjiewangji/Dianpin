@@ -13,12 +13,8 @@ import com.why.dianpin.scenic.adapter.ScenicDetailAdapter;
 import com.why.dianpin.scenic.bean.ScenicDetailHeaderBean;
 import com.why.dianpin.scenic.bean.ScenicDetailItemBean;
 import com.why.dianpin.scenic.bean.ScenicListBean;
-import com.why.dianpin.travel.adapter.TravelDetailAdapter;
 import com.why.dianpin.travel.bean.IDetailBean;
-import com.why.dianpin.travel.bean.TravelBean;
-import com.why.dianpin.travel.bean.TravelDetailHeaderBean;
-import com.why.dianpin.travel.bean.TravelDetailItemBean;
-import com.why.dianpin.util.HttpUtil;
+import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
@@ -27,6 +23,7 @@ import com.why.dianpin.util.view.BaseActivity;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,6 +32,8 @@ import java.util.List;
  */
 
 public class ScenicDetailActivity extends BaseActivity {
+
+    public static final String DETAIL_ID = "detail_id";
 
     private RecyclerView mRecyclerView;
     private ScenicDetailAdapter mAdapter;
@@ -47,8 +46,8 @@ public class ScenicDetailActivity extends BaseActivity {
 
         initViews();
         initEvent();
-        refreshData();
-//        initData();
+//        refreshData();
+        initData();
     }
 
     private void initViews() {
@@ -73,33 +72,39 @@ public class ScenicDetailActivity extends BaseActivity {
     }
 
     private void initData() {
-        HttpUtil.create("scenic/getScenicDetail")
-                .addParameter("detailId", "")
-                .get(new HttpUtil.HttpCallback() {
-                    @Override
-                    public void onSuccess(JSONObject result) {
-                        final TravelBean travelDetail = TravelBean.fromJson(result.optJSONObject("scenicDetail"));
-                        final TravelDetailHeaderBean headerBean = new TravelDetailHeaderBean();
-                        TravelBean.copy(headerBean, travelDetail);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("scenicId", getIntent().getIntExtra(DETAIL_ID, 0) + "");
+        HttpUtils.doPost("scenic/getScenicsDetail", params, new HttpUtils.HttpCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                JSONObject scenic = result.optJSONObject("scenic");
+                if (scenic == null) {
+                    Toaster.show("数据为空");
+                    return;
+                }
+                final ScenicListBean scenicDetail = ScenicListBean.fromJson(scenic);
+                final ScenicDetailHeaderBean headerBean = new ScenicDetailHeaderBean();
+                ScenicListBean.copy(headerBean, scenicDetail);
 
-                        List<IDetailBean> data = new ArrayList<>();
-                        data.add(headerBean);
-                        final String detail = travelDetail.detail;
-                        final String[] splits = detail.split("$$");
-                        for (String str : splits) {
-                            data.add(new TravelDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
-                        }
+                List<IDetailBean> data = new ArrayList<>();
+                data.add(headerBean);
+                final String detail = scenicDetail.detail;
+                final String[] splits = detail.split("\\$\\$");
+                for (String str : splits) {
+                    str = str.replace("\\n", "\n");
+                    data.add(new ScenicDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
+                }
 
-                        if (mAdapter != null) {
-                            mAdapter.setData(data);
-                        }
-                    }
+                if (mAdapter != null) {
+                    mAdapter.setData(data);
+                }
+            }
 
-                    @Override
-                    public void onError(String message) {
-                        Toaster.show(TextUtils.isEmpty(message) ? "获取失败" : message);
-                    }
-                });
+            @Override
+            public void onError(String message) {
+                Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
+            }
+        });
     }
 
     public ScenicListBean getTravelBean() {
@@ -143,6 +148,7 @@ public class ScenicDetailActivity extends BaseActivity {
         final String detail = travelDetail.detail;
         final String[] splits = detail.split("\\$\\$");
         for (String str : splits) {
+            str = str.replace("\\n", "\n");
             data.add(new ScenicDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
         }
 

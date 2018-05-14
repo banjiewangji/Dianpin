@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.travel.bean.TravelDetailHeaderBean;
 import com.why.dianpin.travel.bean.TravelDetailItemBean;
+import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
 
 /**
@@ -25,7 +26,7 @@ public class TravelItemImageHolder extends RecyclerView.ViewHolder {
     }
 
     public void setData(TravelDetailItemBean bean) {
-        Glide.with(itemView.getContext()).load(bean.text).into(mImageView);
+        ImageUtils.loadImage(itemView.getContext(), bean.text, mImageView);
     }
 
 }

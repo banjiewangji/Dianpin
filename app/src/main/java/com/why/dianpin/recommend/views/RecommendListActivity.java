@@ -14,6 +14,7 @@ import com.why.dianpin.recommend.bean.RecommendListBean;
 import com.why.dianpin.scenic.adapter.ScenicListAdapter;
 import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.util.HttpUtil;
+import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
@@ -23,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author shidefeng
@@ -66,24 +69,41 @@ public class RecommendListActivity extends BaseActivity {
     }
 
     private void initData() {
-        HttpUtil.create("recommend/getRecommendList")
-                .addParameter("pageNum", 3)
-                .get(new HttpUtil.HttpCallback() {
-                    @Override
-                    public void onSuccess(JSONObject result) {
-                        final JSONArray scenicList = result.optJSONArray("scenicList");
-                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-                        for (int i = 0, len = scenicList.length(); i < len; i++) {
-                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-                        }
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
-                    }
-                });
-
+//        HashMap<String, String> params = new HashMap<>();
+//        params.put("pageNum", "3");
+//        HttpUtils.doPost("recommend/getRecommendList", params, new HttpUtils.HttpCallback() {
+//            @Override
+//            public void onSuccess(JSONObject result) {
+//                final JSONArray scenicList = result.optJSONArray("scenicList");
+//                final ArrayList<ScenicListBean> beans = new ArrayList<>();
+//                for (int i = 0, len = scenicList.length(); i < len; i++) {
+//                    beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
+//                }
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//                Toaster.show(TextUtils.isEmpty(message) ? "获取失败" : message);
+//            }
+//        });
+//        HttpUtil.create("recommend/getRecommendList")
+//                .addParameter("pageNum", 3)
+//                .get(new HttpUtil.HttpCallback() {
+//                    @Override
+//                    public void onSuccess(JSONObject result) {
+//                        final JSONArray scenicList = result.optJSONArray("scenicList");
+//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
+//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(String message) {
+//                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
+//                    }
+//                });
+//
         final ArrayList<RecommendListBean> beans = new ArrayList<>();
         beans.add(getScenic());
         beans.add(getScenic());

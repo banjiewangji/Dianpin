@@ -52,7 +52,7 @@ public class TravelBean {
         bean.createTime = json.optLong("createTime");
         bean.duration = json.optLong("duration");
         bean.team = json.optString("team");
-        bean.team = json.optString("detail");
+        bean.detail = json.optString("detail");
         return bean;
     }
 

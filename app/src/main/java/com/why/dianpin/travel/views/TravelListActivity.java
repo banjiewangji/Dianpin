@@ -5,18 +5,28 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.why.dianpin.R;
+import com.why.dianpin.scenic.bean.ScenicDetailHeaderBean;
+import com.why.dianpin.scenic.bean.ScenicDetailItemBean;
+import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.travel.adapter.TravelListAdapter;
+import com.why.dianpin.travel.bean.IDetailBean;
 import com.why.dianpin.travel.bean.TravelBean;
+import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author shidefeng
@@ -72,32 +82,33 @@ public class TravelListActivity extends BaseActivity {
     }
 
     private void initData() {
-//        HttpUtil.create("scenic/getScenicList")
-//                .addParameter("pageNum", 3)
-//                .get(new HttpUtil.HttpCallback() {
-//                    @Override
-//                    public void onSuccess(JSONObject result) {
-//                        final JSONArray scenicList = result.optJSONArray("scenicList");
-//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
-//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-//                        }
-//                    }
+        HttpUtils.doPost("travel/getTravelList", null, new HttpUtils.HttpCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                final JSONArray travelList = result.optJSONArray("travels");
+                final ArrayList<TravelBean> beans = new ArrayList<>();
+                for (int i = 0, len = travelList.length(); i < len; i++) {
+                    beans.add(TravelBean.fromJson(travelList.optJSONObject(i)));
+                }
+                if (mAdapter != null) {
+                    mAdapter.setData(beans);
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
+            }
+        });
+
+//        final ArrayList<TravelBean> beans = new ArrayList<>();
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
 //
-//                    @Override
-//                    public void onError(String message) {
-//                        Toaster.show(TextUtils.isEmpty(message) ? "登录失败" : message);
-//                    }
-//                });
-
-        final ArrayList<TravelBean> beans = new ArrayList<>();
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-
-        mAdapter.setData(beans);
+//        mAdapter.setData(beans);
     }
 
     public TravelBean getScenic() {

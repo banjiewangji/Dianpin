@@ -8,7 +8,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.travel.bean.TravelDetailHeaderBean;
+import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author shidefeng
@@ -35,13 +40,18 @@ public class TravelHeaderHolder extends RecyclerView.ViewHolder {
     }
 
     public void setData(TravelDetailHeaderBean bean) {
-        Glide.with(itemView.getContext()).load(bean.imageUrl).into(mImages);
+        ImageUtils.loadImage(itemView.getContext(), bean.imageUrl, mImages);
 
         mTitle.setText(bean.title);
         mAuthor.setText("作者：" + bean.author);
         mAuthor.setText("作者：" + bean.author);
-        mDate.setText("日期\n\n" + bean.beginTime);
+        mDate.setText("日期\n\n" + dataFormat(bean.beginTime));
         mDuration.setText("天数\n\n" + bean.duration);
         mTeam.setText("同伴\n\n" + bean.team);
+    }
+
+    private String dataFormat(long timestamp) {
+        final DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        return format.format(new Date(timestamp));
     }
 }

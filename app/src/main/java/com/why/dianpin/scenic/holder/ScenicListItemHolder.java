@@ -6,12 +6,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.scenic.views.ScenicDetailActivity;
 import com.why.dianpin.scenic.views.StarsView;
-import com.why.dianpin.util.IamgeUtils;
+import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
 
 import java.text.DecimalFormat;
@@ -44,14 +43,16 @@ public class ScenicListItemHolder extends RecyclerView.ViewHolder {
         mLocation = UIUtils.findView(itemView, R.id.item_scenic_list_location);
     }
 
-    public void setData(ScenicListBean bean) {
+    public void setData(final ScenicListBean bean) {
         if (bean == null) {
           return;
         }
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemView.getContext().startActivity(new Intent(itemView.getContext(), ScenicDetailActivity.class));
+                Intent intent = new Intent(itemView.getContext(), ScenicDetailActivity.class);
+                intent.putExtra(ScenicDetailActivity.DETAIL_ID, bean.id);
+                itemView.getContext().startActivity(intent);
             }
         });
 
@@ -63,7 +64,7 @@ public class ScenicListItemHolder extends RecyclerView.ViewHolder {
         mLocation.setText(bean.location);
 
         mStars.update(bean.grade);
-        IamgeUtils.loadImage(itemView.getContext(), bean.imageUrl, mImage);
+        ImageUtils.loadImage(itemView.getContext(), bean.imageUrl, mImage);
     }
 
     private float handleDecimal(double number) {

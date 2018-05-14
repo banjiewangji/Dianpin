@@ -10,7 +10,12 @@ import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.travel.bean.TravelBean;
 import com.why.dianpin.travel.views.TravelDetailActivity;
+import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author shidefeng
@@ -36,14 +41,16 @@ public class TravelListItemHolder extends RecyclerView.ViewHolder {
         mTail = UIUtils.findView(itemView, R.id.item_travel_list_tail);
     }
 
-    public void setData(TravelBean bean) {
+    public void setData(final TravelBean bean) {
         if (bean == null) {
           return;
         }
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemView.getContext().startActivity(new Intent(itemView.getContext(), TravelDetailActivity.class));
+                Intent intent = new Intent(itemView.getContext(), TravelDetailActivity.class);
+                intent.putExtra(TravelDetailActivity.DETAIL_ID, bean.id);
+                itemView.getContext().startActivity(intent);
             }
         });
 
@@ -51,9 +58,14 @@ public class TravelListItemHolder extends RecyclerView.ViewHolder {
         mAuthor.setText("作者：" + bean.author);
         mTitle.setText(bean.title);
         mSeeCount.setText("" + bean.seeCount);
-        String text = "|  " + bean.beginTime + "出游  " + bean.team + "  行程" + bean.duration + "天";
+        String text = "|  " + dataFormat(bean.beginTime) + "出游  " + bean.team + "  行程" + bean.duration + "天";
         mTail.setText(text);
 
-        Glide.with(itemView.getContext()).load(bean.imageUrl).into(mImage);
+        ImageUtils.loadImage(itemView.getContext(), bean.imageUrl, mImage);
+    }
+
+    private String dataFormat(long timestamp) {
+        final DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+        return format.format(new Date(timestamp));
     }
 }

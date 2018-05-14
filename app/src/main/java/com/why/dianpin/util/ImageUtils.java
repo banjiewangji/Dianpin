@@ -7,14 +7,12 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import okhttp3.HttpUrl;
-
 /**
  * @author shidefeng
  * @since 2018/5/13.
  */
 
-public class IamgeUtils {
+public class ImageUtils {
 
     public static void loadImage(Context context, String imageUrl, ImageView imageView) {
         if (TextUtils.isEmpty(imageUrl)) {

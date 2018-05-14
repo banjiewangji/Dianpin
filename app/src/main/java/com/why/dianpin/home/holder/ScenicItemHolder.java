@@ -69,7 +69,10 @@ public class ScenicItemHolder extends MainItemHolder<ScenicItem> implements View
                     int position = (int) v.getTag(R.id.scenic_item_position);
                     List<Scenic> scenics = data.scenics;
                     if (scenics != null && !scenics.isEmpty()) {
-                        mContext.startActivity(new Intent(mContext, ScenicDetailActivity.class));
+                        scenics.get(position);
+                        Intent it = new Intent(mContext, ScenicDetailActivity.class);
+                        it.putExtra(ScenicDetailActivity.DETAIL_ID, position);
+                        mContext.startActivity(it);
                     }
                 }
             });

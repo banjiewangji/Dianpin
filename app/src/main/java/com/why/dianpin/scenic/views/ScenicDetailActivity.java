@@ -1,4 +1,4 @@
-package com.why.dianpin.travel.views;
+package com.why.dianpin.scenic.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,10 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.why.dianpin.R;
+import com.why.dianpin.scenic.adapter.ScenicDetailAdapter;
+import com.why.dianpin.scenic.bean.ScenicDetailHeaderBean;
+import com.why.dianpin.scenic.bean.ScenicDetailItemBean;
+import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.travel.adapter.TravelDetailAdapter;
 import com.why.dianpin.travel.bean.IDetailBean;
 import com.why.dianpin.travel.bean.TravelBean;
@@ -30,16 +34,16 @@ import java.util.List;
  * @since 2018/5/7.
  */
 
-public class TravelDetailActivity extends BaseActivity {
+public class ScenicDetailActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
-    private TravelDetailAdapter mAdapter;
+    private ScenicDetailAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_travel_detail);
+        setContentView(R.layout.layout_scenic_detail);
 
         initViews();
         initEvent();
@@ -53,7 +57,7 @@ public class TravelDetailActivity extends BaseActivity {
 
     private void initEvent() {
         ToolbarHelper toolbarHelper = new ToolbarHelper((Toolbar) findViewById(R.id.tool_bar));
-        toolbarHelper.setTitle("游记详情");
+        toolbarHelper.setTitle("必去景点详情");
         toolbarHelper.setBackgroundColorRes(R.color.colorPrimary);
         toolbarHelper.setNavigation(R.drawable.ic_arrow_back, new View.OnClickListener() {
 
@@ -63,18 +67,18 @@ public class TravelDetailActivity extends BaseActivity {
             }
         });
 
-        mAdapter = new TravelDetailAdapter();
+        mAdapter = new ScenicDetailAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initData() {
-        HttpUtil.create("travel/getTravelDetail")
+        HttpUtil.create("scenic/getScenicDetail")
                 .addParameter("detailId", "")
                 .get(new HttpUtil.HttpCallback() {
                     @Override
                     public void onSuccess(JSONObject result) {
-                        final TravelBean travelDetail = TravelBean.fromJson(result.optJSONObject("travelDetail"));
+                        final TravelBean travelDetail = TravelBean.fromJson(result.optJSONObject("scenicDetail"));
                         final TravelDetailHeaderBean headerBean = new TravelDetailHeaderBean();
                         TravelBean.copy(headerBean, travelDetail);
 
@@ -98,10 +102,13 @@ public class TravelDetailActivity extends BaseActivity {
                 });
     }
 
-    public TravelBean getTravelBean() {
-        final TravelBean bean = new TravelBean(1, "精华", "傅红雪", "北京的冬天太冷，我没有足够的衣裳拍照--春节北京四日游"
-                , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
-                , 453, 344555, 124, 4, "朋友");
+    public ScenicListBean getTravelBean() {
+
+        final ScenicListBean bean = new ScenicListBean(1, "故宫博物院"
+                , "只要是到过这里的额人"
+                , "https://c3-q.mafengwo.net/s7/M00/EC/2D/wKgB6lUFP22AY7WwAA6_ep1adRs52.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90"
+                , 3, "5A", 4.9, 13345, "东城区", "", 50);
+
         bean.detail = "目的地：北京。$$https://c3-q.mafengwo.net/s7/M00/EC/2D/wKgB6lU" +
                 "FP22AY7WwAA6_ep1adRs52.jpeg?imageView2%2F2%2Fw%2F680%2Fq%2F90$$   " +
                 "     只能说某人的都市情节怎么都消退不了，我还是偏爱自然风光多一些。但北京很" +
@@ -122,20 +129,21 @@ public class TravelDetailActivity extends BaseActivity {
                 "旅游（阿里旅游）看到以上软文联系我，钱拿来，不用谢。（好多蜂友问酒店的问题，是北京万豪酒店，" +
                 "单订的话会比较贵）\n        下午三点，从酒店出发。帽子、手套、羽绒衣、防风裤、雪地靴，一个" +
                 "都不能少。说好的春节蓝呢？迎接我们的是标志性的雾霾天，好失落。";
+
         return bean;
     }
 
     public void refreshData() {
-        final TravelBean travelDetail = getTravelBean();
-        final TravelDetailHeaderBean headerBean = new TravelDetailHeaderBean();
-        TravelBean.copy(headerBean, travelDetail);
+        final ScenicListBean travelDetail = getTravelBean();
+        final ScenicDetailHeaderBean headerBean = new ScenicDetailHeaderBean();
+        ScenicListBean.copy(headerBean, travelDetail);
 
         List<IDetailBean> data = new ArrayList<>();
         data.add(headerBean);
         final String detail = travelDetail.detail;
         final String[] splits = detail.split("\\$\\$");
         for (String str : splits) {
-            data.add(new TravelDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
+            data.add(new ScenicDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
         }
 
         if (mAdapter != null) {

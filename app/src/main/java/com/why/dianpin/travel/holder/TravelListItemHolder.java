@@ -1,5 +1,6 @@
 package com.why.dianpin.travel.holder;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.travel.bean.TravelBean;
+import com.why.dianpin.travel.views.TravelDetailActivity;
 import com.why.dianpin.util.UIUtils;
 
 /**
@@ -41,7 +43,7 @@ public class TravelListItemHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                itemView.getContext().startActivity(new Intent(itemView.getContext(), TravelDetailActivity.class));
             }
         });
 

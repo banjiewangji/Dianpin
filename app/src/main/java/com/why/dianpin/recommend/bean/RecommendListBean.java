@@ -14,16 +14,18 @@ public class RecommendListBean {
     public String subTitle;     // 副标题
     public String imageUrl;     // 封面
     public int seeCount;        // 查看数
+    public String detail;       // 详情
 
     public RecommendListBean() {
     }
 
-    public RecommendListBean(int id, String title, String subTitle, String imageUrl, int seeCount) {
+    public RecommendListBean(int id, String title, String subTitle, String imageUrl, int seeCount, String detail) {
         this.id = id;
         this.title = title;
         this.subTitle = subTitle;
         this.imageUrl = imageUrl;
         this.seeCount = seeCount;
+        this.detail = detail;
     }
 
     public static RecommendListBean fromJson(JSONObject json) {
@@ -36,6 +38,16 @@ public class RecommendListBean {
         bean.subTitle = json.optString("subTitle");
         bean.imageUrl = json.optString("imageUrl");
         bean.seeCount = json.optInt("seeCount");
+        bean.detail = json.optString("detail");
         return bean;
+    }
+
+    public static void copy(RecommendListBean dst, RecommendListBean src) {
+        dst.id = src.id;
+        dst.title = src.title;
+        dst.subTitle = src.subTitle;
+        dst.imageUrl = src.imageUrl;
+        dst.seeCount = src.seeCount;
+        dst.detail = src.detail;
     }
 }

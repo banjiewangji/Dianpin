@@ -1,4 +1,4 @@
-package com.why.dianpin.travel.adapter;
+package com.why.dianpin.recommend.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,12 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.why.dianpin.R;
+import com.why.dianpin.recommend.bean.RecommendDetailHeaderBean;
+import com.why.dianpin.recommend.bean.RecommendDetailItemBean;
+import com.why.dianpin.recommend.holder.RecommendHeaderHolder;
+import com.why.dianpin.recommend.holder.RecommendItemTextHolder;
 import com.why.dianpin.travel.bean.IDetailBean;
-import com.why.dianpin.travel.bean.TravelDetailHeaderBean;
-import com.why.dianpin.travel.bean.TravelDetailItemBean;
-import com.why.dianpin.travel.holder.TravelHeaderHolder;
-import com.why.dianpin.travel.holder.TravelItemImageHolder;
-import com.why.dianpin.travel.holder.TravelItemTextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
  * @since 2018/5/7.
  */
 
-public class TravelDetailAdapter extends RecyclerView.Adapter {
+public class RecommendDetailAdapter extends RecyclerView.Adapter {
 
     private List<IDetailBean> mData = new ArrayList<>();
 
@@ -37,15 +36,12 @@ public class TravelDetailAdapter extends RecyclerView.Adapter {
         View view;
         switch (viewType) {
             case IDetailBean.TYPE_HEADER:
-                view = inflater.inflate(R.layout.item_travel_detail_header, parent, false);
-                return new TravelHeaderHolder(view);
-            case IDetailBean.TYPE_ITEM_IMAGE:
-                view = inflater.inflate(R.layout.item_detail_item_image, parent, false);
-                return new TravelItemImageHolder(view);
+                view = inflater.inflate(R.layout.item_recommend_detail_header, parent, false);
+                return new RecommendHeaderHolder(view);
             case IDetailBean.TYPE_ITEM_TEXT:
             default:
                 view = inflater.inflate(R.layout.item_detail_item_text, parent, false);
-                return new TravelItemTextHolder(view);
+                return new RecommendItemTextHolder(view);
         }
     }
 
@@ -57,12 +53,10 @@ public class TravelDetailAdapter extends RecyclerView.Adapter {
 
         IDetailBean bean = mData.get(position);
 
-        if (holder instanceof TravelHeaderHolder) {
-            ((TravelHeaderHolder) holder).setData((TravelDetailHeaderBean) bean);
-        } else if (holder instanceof TravelItemImageHolder) {
-            ((TravelItemImageHolder) holder).setData((TravelDetailItemBean) bean);
-        } else if (holder instanceof TravelItemTextHolder) {
-            ((TravelItemTextHolder) holder).setData((TravelDetailItemBean) bean);
+        if (holder instanceof RecommendHeaderHolder) {
+            ((RecommendHeaderHolder) holder).setData((RecommendDetailHeaderBean) bean);
+        } else if (holder instanceof RecommendItemTextHolder) {
+            ((RecommendItemTextHolder) holder).setData((RecommendDetailItemBean) bean);
         }
     }
 

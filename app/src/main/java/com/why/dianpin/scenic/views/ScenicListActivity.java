@@ -65,40 +65,40 @@ public class ScenicListActivity extends BaseActivity {
     }
 
     private void initData() {
-        HttpUtil.create("scenic/getScenicList")
-                .get(new HttpUtil.HttpCallback() {
-                    @Override
-                    public void onSuccess(JSONObject result) {
-                        final JSONArray scenicList = result.optJSONArray("scenics");
-                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-                        for (int i = 0, len = scenicList.length(); i < len; i++) {
-                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-                        }
-                        if (mAdapter != null) {
-                            mAdapter.setData(beans);
-                        }
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
-                    }
-                });
-
-//        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-//        beans.add(getScenic());
-//        beans.add(getScenic());
-//        beans.add(getScenic());
-//        beans.add(getScenic());
-//        beans.add(getScenic());
+//        HttpUtil.create("scenic/getScenicList")
+//                .get(new HttpUtil.HttpCallback() {
+//                    @Override
+//                    public void onSuccess(JSONObject result) {
+//                        final JSONArray scenicList = result.optJSONArray("scenics");
+//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
+//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
+//                        }
+//                        if (mAdapter != null) {
+//                            mAdapter.setData(beans);
+//                        }
+//                    }
 //
-//        mAdapter.setData(beans);
+//                    @Override
+//                    public void onError(String message) {
+//                        Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
+//                    }
+//                });
+
+        final ArrayList<ScenicListBean> beans = new ArrayList<>();
+        beans.add(getScenic());
+        beans.add(getScenic());
+        beans.add(getScenic());
+        beans.add(getScenic());
+        beans.add(getScenic());
+
+        mAdapter.setData(beans);
     }
 
     public ScenicListBean getScenic() {
         return new ScenicListBean(3, "故宫博物院"
                 , "井壁辉煌风干肉给他告诉她是否收入输入"
                 , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
-                , 1, "5A", 4.6, 124, "东城区");
+                , 1, "5A", 4.6, 124, "东城区", "", 50);
     }
 }

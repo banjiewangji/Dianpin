@@ -99,6 +99,6 @@ public class RecommendListActivity extends BaseActivity {
                 , "故宫博物馆"
                 , "黄琉璃瓦顶、青白实底座，饰以金壁辉煌的油画"
                 , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
-                , 323424);
+                , 323424, "");
     }
 }

@@ -81,6 +81,11 @@
             android:name=".scenic.views.ScenicListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <!-- 必去景点详情 -->
+        <activity
+            android:name=".scenic.views.ScenicDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
         <!-- 游记 -->
         <activity

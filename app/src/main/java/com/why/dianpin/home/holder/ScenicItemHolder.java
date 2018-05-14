@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.home.beans.ScenicItem;
+import com.why.dianpin.scenic.views.ScenicDetailActivity;
 import com.why.dianpin.scenic.views.ScenicListActivity;
 
 import java.util.List;
@@ -68,7 +69,7 @@ public class ScenicItemHolder extends MainItemHolder<ScenicItem> implements View
                     int position = (int) v.getTag(R.id.scenic_item_position);
                     List<Scenic> scenics = data.scenics;
                     if (scenics != null && !scenics.isEmpty()) {
-                        // TODO: 2018/4/9 onclick
+                        mContext.startActivity(new Intent(mContext, ScenicDetailActivity.class));
                     }
                 }
             });

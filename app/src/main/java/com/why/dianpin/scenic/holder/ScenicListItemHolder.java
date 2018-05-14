@@ -1,5 +1,6 @@
 package com.why.dianpin.scenic.holder;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.scenic.bean.ScenicListBean;
+import com.why.dianpin.scenic.views.ScenicDetailActivity;
 import com.why.dianpin.scenic.views.StarsView;
 import com.why.dianpin.util.IamgeUtils;
 import com.why.dianpin.util.UIUtils;
@@ -49,7 +51,7 @@ public class ScenicListItemHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                itemView.getContext().startActivity(new Intent(itemView.getContext(), ScenicDetailActivity.class));
             }
         });
 

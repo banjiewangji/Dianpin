@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Recommend;
 import com.why.dianpin.home.beans.RecommendItem;
+import com.why.dianpin.recommend.views.RecommendDetailActivity;
 import com.why.dianpin.recommend.views.RecommendListActivity;
 import com.why.dianpin.util.HttpUtil;
 
@@ -82,6 +83,12 @@ public class RecommendItemHolder extends MainItemHolder<RecommendItem> {
                 TextView item = mItemViews.get(i);
                 item.setVisibility(View.VISIBLE);
                 item.setText(r.content);
+                item.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mContext.startActivity(new Intent(mContext, RecommendDetailActivity.class));
+                    }
+                });
             } else {
                 mItemViews.get(i).setVisibility(View.INVISIBLE);
             }

@@ -98,6 +98,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
+        <!-- 问答 -->
+        <activity
+            android:name=".question.views.QuestionListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>

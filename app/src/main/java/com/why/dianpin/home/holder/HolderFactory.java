@@ -23,6 +23,8 @@ public class HolderFactory {
                 return new TravelsItemHolder(parent);
             case IMainListItem.TYPE_MAP:
                 return new MapItemHolder(parent);
+            case IMainListItem.TYPE_QUESTION:
+                return new QuestionItemHolder(parent);
             default:
                 return new DefaultItemHolder(parent);
         }

@@ -3,6 +3,7 @@ package com.why.dianpin.home;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,12 +18,15 @@ import com.why.dianpin.home.beans.Category;
 import com.why.dianpin.home.beans.CategoryItem;
 import com.why.dianpin.home.beans.IMainListItem;
 import com.why.dianpin.home.beans.MapItem;
+import com.why.dianpin.home.beans.QuestionItem;
 import com.why.dianpin.home.beans.Recommend;
 import com.why.dianpin.home.beans.RecommendItem;
 import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.home.beans.ScenicItem;
 import com.why.dianpin.home.beans.Travels;
 import com.why.dianpin.home.beans.TravelsItem;
+import com.why.dianpin.question.bean.AnswerBean;
+import com.why.dianpin.question.bean.QuestionBean;
 import com.why.dianpin.user.views.UserLoginActivity;
 import com.why.dianpin.user.views.UserRegisterActivity;
 import com.why.dianpin.util.LoginHelper;
@@ -109,6 +113,7 @@ public class MainActivity extends BaseActivity {
         items.add(getScenicItem());
         items.add(getTravelsItem());
         items.add(getMapItem());
+        items.add(getQuestionItem());
 
         mListAdapter.setData(items);
 
@@ -203,6 +208,30 @@ public class MainActivity extends BaseActivity {
     private MapItem getMapItem() {
         MapItem mapItem = new MapItem();
         return mapItem;
+    }
+
+    private QuestionItem getQuestionItem() {
+        final QuestionItem item = new QuestionItem();
+
+        item.questions = new ArrayList<>();
+
+        item.questions.add(getQuestionBean());
+        item.questions.add(getQuestionBean());
+        item.questions.add(getQuestionBean());
+
+        return item;
+
+    }
+
+    @NonNull
+    private QuestionBean getQuestionBean() {
+        final QuestionBean question = new QuestionBean();
+        question.timestamp = System.currentTimeMillis();
+        question.question = "北京菜什么味道，南方人吃得惯吗";
+        question.answers = new ArrayList<>();
+        question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis()));
+        question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis()));
+        return question;
     }
 
     private Drawable getIcon(int id) {

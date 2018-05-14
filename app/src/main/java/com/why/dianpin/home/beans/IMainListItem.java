@@ -13,6 +13,7 @@ public interface IMainListItem {
     int TYPE_RECOMMEND = 3;     // 出行宝典
     int TYPE_TRAVELS = 4;       // 游记
     int TYPE_MAP = 5;           // 地图
+    int TYPE_QUESTION = 6;      // 问答
 
     int getItemType();
 

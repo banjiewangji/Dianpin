@@ -20,20 +20,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:clipToPadding="false"
-                android:padding="5dp" />
+                android:background="#E5E5E5"
+                android:clipToPadding="false" />
 
             <TextView
-                android:id="@+id/tv_ask_question"
+                android:id="@+id/tv_answer_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:text="我要提问"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"
+                android:layout_gravity="bottom"
                 android:background="@color/colorPrimary"
-                android:layout_gravity="bottom" />
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="我要回答"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
         </LinearLayout>
 
         <View

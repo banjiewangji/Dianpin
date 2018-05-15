@@ -1,15 +1,18 @@
 package com.why.dianpin.question.views;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.why.dianpin.R;
-import com.why.dianpin.scenic.adapter.ScenicListAdapter;
-import com.why.dianpin.scenic.bean.ScenicListBean;
+import com.why.dianpin.question.adapter.QuestionListAdapter;
+import com.why.dianpin.question.bean.AnswerBean;
+import com.why.dianpin.question.bean.QuestionBean;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
@@ -24,13 +27,14 @@ import java.util.ArrayList;
 public class QuestionListActivity extends BaseActivity {
 
     private RecyclerView mRecyclerView;
-    private ScenicListAdapter mAdapter;
+    private QuestionListAdapter mAdapter;
+    private TextView mAskQuestion;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_scenic_list);
+        setContentView(R.layout.layout_question_list);
 
         initViews();
         initEvent();
@@ -39,11 +43,12 @@ public class QuestionListActivity extends BaseActivity {
 
     private void initViews() {
         mRecyclerView = UIUtils.findView(this, R.id.recycler_view);
+        mAskQuestion = UIUtils.findView(this, R.id.tv_ask_question);
     }
 
     private void initEvent() {
         ToolbarHelper toolbarHelper = new ToolbarHelper((Toolbar) findViewById(R.id.tool_bar));
-        toolbarHelper.setTitle("必去景点排行");
+        toolbarHelper.setTitle("问答");
         toolbarHelper.setBackgroundColorRes(R.color.colorPrimary);
         toolbarHelper.setNavigation(R.drawable.ic_arrow_back, new View.OnClickListener() {
             @Override
@@ -52,9 +57,16 @@ public class QuestionListActivity extends BaseActivity {
             }
         });
 
-        mAdapter = new ScenicListAdapter();
+        mAdapter = new QuestionListAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+
+        mAskQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void initData() {
@@ -78,20 +90,26 @@ public class QuestionListActivity extends BaseActivity {
 //                    }
 //                });
 
-        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
+        final ArrayList<QuestionBean> beans = new ArrayList<>();
+        beans.add(getQuestionBean());
+        beans.add(getQuestionBean());
+        beans.add(getQuestionBean());
+        beans.add(getQuestionBean());
+        beans.add(getQuestionBean());
+        beans.add(getQuestionBean());
+        beans.add(getQuestionBean());
 
         mAdapter.setData(beans);
     }
 
-    public ScenicListBean getScenic() {
-        return new ScenicListBean(3, "故宫博物院"
-                , "井壁辉煌风干肉给他告诉她是否收入输入"
-                , "https://www.bing.com/s/hpb/NorthMale_EN-US8782628354_1920x1080.jpg"
-                , 1, "5A", 4.6, 124, "东城区", "", 50);
+    @NonNull
+    private QuestionBean getQuestionBean() {
+        final QuestionBean question = new QuestionBean();
+        question.timestamp = System.currentTimeMillis();
+        question.question = "北京菜什么味道，南方人吃得惯吗";
+        question.answers = new ArrayList<>();
+        question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis(), null));
+        question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis(), null));
+        return question;
     }
 }

@@ -1,5 +1,7 @@
 package com.why.dianpin.question.bean;
 
+import com.why.dianpin.user.bean.UserBean;
+
 import java.util.List;
 
 /**
@@ -13,5 +15,7 @@ public class QuestionBean {
     public String question;
     public long timestamp;
     public List<AnswerBean> answers;
+
+    public UserBean author;
 
 }

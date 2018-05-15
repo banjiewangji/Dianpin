@@ -11,5 +11,9 @@ public interface IDetailBean {
     int TYPE_ITEM_TEXT = 1;
     int TYPE_ITEM_IMAGE = 2;
 
+    int TYPE_QUESTION = 3;
+    int TYPE_ANSWER_TIPS = 4;
+    int TYPE_ANSWER_ITEM = 5;
+
     int getType();
 }

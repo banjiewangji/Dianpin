@@ -229,8 +229,8 @@ public class MainActivity extends BaseActivity {
         question.timestamp = System.currentTimeMillis();
         question.question = "北京菜什么味道，南方人吃得惯吗";
         question.answers = new ArrayList<>();
-        question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis()));
-        question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis()));
+        question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis(), null));
+        question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis(), null));
         return question;
     }
 

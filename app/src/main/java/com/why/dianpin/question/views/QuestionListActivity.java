@@ -1,5 +1,6 @@
 package com.why.dianpin.question.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.why.dianpin.R;
 import com.why.dianpin.question.adapter.QuestionListAdapter;
 import com.why.dianpin.question.bean.AnswerBean;
 import com.why.dianpin.question.bean.QuestionBean;
+import com.why.dianpin.user.bean.UserBean;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
@@ -64,9 +66,14 @@ public class QuestionListActivity extends BaseActivity {
         mAskQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                gotoAddQuestionActivity();
             }
         });
+    }
+
+    private void gotoAddQuestionActivity() {
+        Intent intent = new Intent(QuestionListActivity.this, AddQuestionActivity.class);
+        startActivity(intent);
     }
 
     private void initData() {
@@ -110,6 +117,9 @@ public class QuestionListActivity extends BaseActivity {
         question.answers = new ArrayList<>();
         question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis(), null));
         question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis(), null));
+        question.author = new UserBean();
+        question.author.username = "fengfengfegn";
+        question.author.id = 3;
         return question;
     }
 }

@@ -108,6 +108,11 @@
             android:name=".question.views.QuestionDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <!-- 问答详情 -->
+        <activity
+            android:name=".question.views.AddQuestionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
     </application>
 

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,11 +16,18 @@ import com.why.dianpin.question.adapter.QuestionListAdapter;
 import com.why.dianpin.question.bean.AnswerBean;
 import com.why.dianpin.question.bean.QuestionBean;
 import com.why.dianpin.user.bean.UserBean;
+import com.why.dianpin.util.HttpUtils;
+import com.why.dianpin.util.LoginHelper;
+import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author xiaoyueyue
@@ -40,6 +48,11 @@ public class QuestionListActivity extends BaseActivity {
 
         initViews();
         initEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
     }
 
@@ -66,7 +79,11 @@ public class QuestionListActivity extends BaseActivity {
         mAskQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gotoAddQuestionActivity();
+                if (LoginHelper.isLogin()) {
+                    gotoAddQuestionActivity();
+                } else {
+                    LoginHelper.showLoginDialog(QuestionListActivity.this);
+                }
             }
         });
     }
@@ -77,36 +94,36 @@ public class QuestionListActivity extends BaseActivity {
     }
 
     private void initData() {
-//        HttpUtil.create("scenic/getScenicList")
-//                .get(new HttpUtil.HttpCallback() {
-//                    @Override
-//                    public void onSuccess(JSONObject result) {
-//                        final JSONArray scenicList = result.optJSONArray("scenics");
-//                        final ArrayList<ScenicListBean> beans = new ArrayList<>();
-//                        for (int i = 0, len = scenicList.length(); i < len; i++) {
-//                            beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-//                        }
-//                        if (mAdapter != null) {
-//                            mAdapter.setData(beans);
-//                        }
-//                    }
+        HashMap<String, String> params = new HashMap<>();
+        HttpUtils.doPost("question/getQuestionList", params, new HttpUtils.HttpCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                final JSONArray scenicList = result.optJSONArray("questions");
+                final ArrayList<QuestionBean> beans = new ArrayList<>();
+                for (int i = 0, len = scenicList.length(); i < len; i++) {
+                    beans.add(QuestionBean.fromJson(scenicList.optJSONObject(i)));
+                }
+                if (mAdapter != null) {
+                    mAdapter.setData(beans);
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                Toaster.show(TextUtils.isEmpty(message) ? "获取失败" : message);
+            }
+        });
+
+//        final ArrayList<QuestionBean> beans = new ArrayList<>();
+//        beans.add(getQuestionBean());
+//        beans.add(getQuestionBean());
+//        beans.add(getQuestionBean());
+//        beans.add(getQuestionBean());
+//        beans.add(getQuestionBean());
+//        beans.add(getQuestionBean());
+//        beans.add(getQuestionBean());
 //
-//                    @Override
-//                    public void onError(String message) {
-//                        Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
-//                    }
-//                });
-
-        final ArrayList<QuestionBean> beans = new ArrayList<>();
-        beans.add(getQuestionBean());
-        beans.add(getQuestionBean());
-        beans.add(getQuestionBean());
-        beans.add(getQuestionBean());
-        beans.add(getQuestionBean());
-        beans.add(getQuestionBean());
-        beans.add(getQuestionBean());
-
-        mAdapter.setData(beans);
+//        mAdapter.setData(beans);
     }
 
     @NonNull

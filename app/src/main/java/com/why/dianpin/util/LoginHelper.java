@@ -17,7 +17,7 @@ import com.why.dianpin.user.views.UserLoginActivity;
 public class LoginHelper {
 
     public static boolean isLogin() {
-        String username = PreferenceUtil.getValue(PreferenceUtil.KEY_USERNAME, "");
+        String username = PreferenceUtil.getValue(PreferenceUtil.KEY_USER, "");
         return !TextUtils.isEmpty(username);
     }
 

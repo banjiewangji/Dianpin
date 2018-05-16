@@ -3,6 +3,7 @@ package com.why.dianpin.user.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -53,6 +54,22 @@ public class UserBean implements Parcelable {
         user.username = json.optString("username", "");
         user.password = json.optString("password", "");
         return user;
+    }
+
+    public static JSONObject toJson(UserBean user) {
+        JSONObject json1 = new JSONObject();
+        if (user != null) {
+            try {
+                json1.put("id", user.id);
+                json1.put("username", user.username);
+                json1.put("password", user.password);
+                json1.put("age", user.age);
+                json1.put("sex", user.sex);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return json1;
     }
 
     @Override

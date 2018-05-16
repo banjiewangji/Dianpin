@@ -96,7 +96,7 @@ public class MainActivity extends BaseActivity {
 
                         break;
                     case R.id.quit:
-                        PreferenceUtil.setValue(PreferenceUtil.KEY_USERNAME, "");
+                        PreferenceUtil.setValue(PreferenceUtil.KEY_USER, "");
                         updateMenu();
                         break;
                 }

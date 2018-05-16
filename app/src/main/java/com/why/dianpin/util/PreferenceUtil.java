@@ -12,7 +12,7 @@ import com.why.dianpin.MyApplication;
 
 public class PreferenceUtil {
 
-    public static final String KEY_USERNAME = "key_username";
+    public static final String KEY_USER = "key_user";
 
     public static void setValue(String key, String username) {
         SharedPreferences mSharedPreferences = MyApplication.getContext().getSharedPreferences("why_Preference", Context.MODE_PRIVATE);

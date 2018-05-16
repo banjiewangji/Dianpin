@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.recommend.bean.RecommendListBean;
 import com.why.dianpin.recommend.views.RecommendDetailActivity;
+import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
 
 import java.text.DecimalFormat;
@@ -34,14 +35,16 @@ public class RecommendListItemHolder extends RecyclerView.ViewHolder {
         mSeeCount = UIUtils.findView(itemView, R.id.item_recommend_list_seecount);
     }
 
-    public void setData(RecommendListBean bean) {
+    public void setData(final RecommendListBean bean) {
         if (bean == null) {
           return;
         }
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemView.getContext().startActivity(new Intent(itemView.getContext(), RecommendDetailActivity.class));
+                Intent intent = new Intent(itemView.getContext(), RecommendDetailActivity.class);
+                intent.putExtra(RecommendDetailActivity.DETAIL_ID, bean.id);
+                itemView.getContext().startActivity(intent);
             }
         });
 
@@ -49,7 +52,7 @@ public class RecommendListItemHolder extends RecyclerView.ViewHolder {
         mSubTitle.setText(bean.subTitle);
         mSeeCount.setText(bean.seeCount + "人");
 
-        Glide.with(itemView.getContext()).load(bean.imageUrl).into(mImage);
+        ImageUtils.loadImage(itemView.getContext(), bean.imageUrl, mImage);
     }
 
     private float handleDecimal(double number) {

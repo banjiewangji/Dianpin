@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 import com.why.dianpin.R;
 import com.why.dianpin.recommend.bean.RecommendDetailHeaderBean;
 import com.why.dianpin.scenic.bean.ScenicDetailHeaderBean;
+import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
 
 /**
@@ -30,7 +31,7 @@ public class RecommendHeaderHolder extends RecyclerView.ViewHolder {
     }
 
     public void setData(RecommendDetailHeaderBean bean) {
-        Glide.with(itemView.getContext()).load(bean.imageUrl).into(mImages);
+        ImageUtils.loadImage(itemView.getContext(), bean.imageUrl, mImages);
 
         mTitle.setText(bean.title);
         mSubTitle.setText(bean.subTitle);

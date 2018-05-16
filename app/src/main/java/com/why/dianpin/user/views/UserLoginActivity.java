@@ -115,7 +115,7 @@ public class UserLoginActivity extends BaseActivity implements View.OnClickListe
                         if (successCode == 1) {
                             Toaster.show("登录成功");
 
-                            onLoginSuccess(username);
+                            onLoginSuccess(result.optJSONObject("user"));
                         } else {
                             Toaster.show(failedMessage);
                         }
@@ -129,8 +129,8 @@ public class UserLoginActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    private void onLoginSuccess(String username) {
-        PreferenceUtil.setValue(PreferenceUtil.KEY_USERNAME, username);
+    private void onLoginSuccess(JSONObject user) {
+        PreferenceUtil.setValue(PreferenceUtil.KEY_USER, user.toString());
 
         setResult(RESULT_OK);
         finish();

@@ -54,8 +54,8 @@ public class QuestionDetailActivity extends BaseActivity {
 
         initViews();
         initEvent();
-        refreshData();
-//        initData();
+//        refreshData();
+        initData();
     }
 
     private void initViews() {
@@ -89,26 +89,33 @@ public class QuestionDetailActivity extends BaseActivity {
 
     private void initData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("scenicId", getIntent().getIntExtra(DETAIL_ID, 0) + "");
-        HttpUtils.doPost("scenic/getScenicsDetail", params, new HttpUtils.HttpCallback() {
+        params.put("questionId", getIntent().getIntExtra(DETAIL_ID, 0) + "");
+        HttpUtils.doPost("question/getQuestionDetail", params, new HttpUtils.HttpCallback() {
             @Override
             public void onSuccess(JSONObject result) {
-                JSONObject scenic = result.optJSONObject("scenic");
+                JSONObject scenic = result.optJSONObject("question");
                 if (scenic == null) {
                     Toaster.show("数据为空");
                     return;
                 }
-                final ScenicListBean scenicDetail = ScenicListBean.fromJson(scenic);
-                final ScenicDetailHeaderBean headerBean = new ScenicDetailHeaderBean();
-                ScenicListBean.copy(headerBean, scenicDetail);
+                final QuestionBean question = QuestionBean.fromJson(scenic);
+                QuestionDetailQuestionBean questionBean = new QuestionDetailQuestionBean();
+                questionBean.question = question.question;
 
                 List<IDetailBean> data = new ArrayList<>();
-                data.add(headerBean);
-                final String detail = scenicDetail.detail;
-                final String[] splits = detail.split("\\$\\$");
-                for (String str : splits) {
-                    str = str.replace("\\n", "\n");
-                    data.add(new ScenicDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
+                data.add(questionBean);
+
+                List<AnswerBean> answers = question.answers;
+                QuestionDetailTipsBean tipsBean = new QuestionDetailTipsBean();
+                tipsBean.answerNum = answers == null ? 0 : answers.size();
+                data.add(tipsBean);
+
+                if (answers != null) {
+                    for (AnswerBean answer : answers) {
+                        QuestionDetailItemBean itemBean = new QuestionDetailItemBean();
+                        itemBean.answer = answer;
+                        data.add(itemBean);
+                    }
                 }
 
                 if (mAdapter != null) {

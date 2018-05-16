@@ -24,11 +24,13 @@ import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.travel.bean.IDetailBean;
 import com.why.dianpin.user.bean.UserBean;
 import com.why.dianpin.util.HttpUtils;
+import com.why.dianpin.util.PreferenceUtil;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
 import com.why.dianpin.util.view.BaseActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
@@ -42,8 +44,6 @@ import java.util.List;
  */
 
 public class AddQuestionActivity extends BaseActivity {
-
-    public static final String DETAIL_ID = "detail_id";
 
     private EditText mContent;
     private TextView mBtnAdd;
@@ -81,39 +81,36 @@ public class AddQuestionActivity extends BaseActivity {
         mBtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toaster.show("提交成功");
+                addQuestion();
             }
         });
     }
 
-    private void initData() {
+    private void addQuestion() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("scenicId", getIntent().getIntExtra(DETAIL_ID, 0) + "");
-        HttpUtils.doPost("scenic/getScenicsDetail", params, new HttpUtils.HttpCallback() {
+        params.put("question", mContent.getText().toString());
+        params.put("timestamp", System.currentTimeMillis() + "");
+        String userJson = PreferenceUtil.getValue(PreferenceUtil.KEY_USER, "");
+        try {
+            params.put("userId", UserBean.fromJson(new JSONObject(userJson)).id + "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        HttpUtils.doPost("question/addQuestion", params, new HttpUtils.HttpCallback() {
             @Override
             public void onSuccess(JSONObject result) {
-                JSONObject scenic = result.optJSONObject("scenic");
-                if (scenic == null) {
-                    Toaster.show("数据为空");
-                    return;
-                }
-                final ScenicListBean scenicDetail = ScenicListBean.fromJson(scenic);
-                final ScenicDetailHeaderBean headerBean = new ScenicDetailHeaderBean();
-                ScenicListBean.copy(headerBean, scenicDetail);
-
-                List<IDetailBean> data = new ArrayList<>();
-                data.add(headerBean);
-                final String detail = scenicDetail.detail;
-                final String[] splits = detail.split("\\$\\$");
-                for (String str : splits) {
-                    str = str.replace("\\n", "\n");
-                    data.add(new ScenicDetailItemBean(str.startsWith("http") ? IDetailBean.TYPE_ITEM_IMAGE : IDetailBean.TYPE_ITEM_TEXT, str));
+                int resultCode = result.optInt("resultCode");
+                if (resultCode == 1) {
+                    Toaster.show("提问完成");
+                    finish();
+                } else {
+                    Toaster.show("提问失败");
                 }
             }
 
             @Override
             public void onError(String message) {
-                Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
+                Toaster.show(TextUtils.isEmpty(message) ? "提问失败" : message);
             }
         });
     }

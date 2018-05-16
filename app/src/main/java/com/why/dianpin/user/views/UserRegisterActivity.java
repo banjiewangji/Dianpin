@@ -190,7 +190,7 @@ public class UserRegisterActivity extends BaseActivity implements View.OnClickLi
                     public void onSuccess(JSONObject result) {
                         int successCode = result.optInt("resultCode", 0);
                         if (successCode == 1) {
-                            PreferenceUtil.setValue(PreferenceUtil.KEY_USERNAME, user.username);
+                            PreferenceUtil.setValue(PreferenceUtil.KEY_USER, UserBean.toJson(user).toString());
                             Toaster.show("注册成功");
                             finish();
                         } else {

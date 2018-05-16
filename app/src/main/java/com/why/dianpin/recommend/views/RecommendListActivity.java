@@ -69,23 +69,25 @@ public class RecommendListActivity extends BaseActivity {
     }
 
     private void initData() {
-//        HashMap<String, String> params = new HashMap<>();
-//        params.put("pageNum", "3");
-//        HttpUtils.doPost("recommend/getRecommendList", params, new HttpUtils.HttpCallback() {
-//            @Override
-//            public void onSuccess(JSONObject result) {
-//                final JSONArray scenicList = result.optJSONArray("scenicList");
-//                final ArrayList<ScenicListBean> beans = new ArrayList<>();
-//                for (int i = 0, len = scenicList.length(); i < len; i++) {
-//                    beans.add(ScenicListBean.fromJson(scenicList.optJSONObject(i)));
-//                }
-//            }
-//
-//            @Override
-//            public void onError(String message) {
-//                Toaster.show(TextUtils.isEmpty(message) ? "获取失败" : message);
-//            }
-//        });
+        HashMap<String, String> params = new HashMap<>();
+        HttpUtils.doPost("recommend/getRecommendList", params, new HttpUtils.HttpCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                final JSONArray scenicList = result.optJSONArray("recommends");
+                final ArrayList<RecommendListBean> beans = new ArrayList<>();
+                for (int i = 0, len = scenicList.length(); i < len; i++) {
+                    beans.add(RecommendListBean.fromJson(scenicList.optJSONObject(i)));
+                }
+                if (mAdapter != null) {
+                    mAdapter.setData(beans);
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                Toaster.show(TextUtils.isEmpty(message) ? "获取失败" : message);
+            }
+        });
 //        HttpUtil.create("recommend/getRecommendList")
 //                .addParameter("pageNum", 3)
 //                .get(new HttpUtil.HttpCallback() {
@@ -104,14 +106,14 @@ public class RecommendListActivity extends BaseActivity {
 //                    }
 //                });
 //
-        final ArrayList<RecommendListBean> beans = new ArrayList<>();
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-        beans.add(getScenic());
-
-        mAdapter.setData(beans);
+//        final ArrayList<RecommendListBean> beans = new ArrayList<>();
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//        beans.add(getScenic());
+//
+//        mAdapter.setData(beans);
     }
 
     public RecommendListBean getScenic() {

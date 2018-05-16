@@ -44,7 +44,7 @@ public class QuestionListItemHolder extends RecyclerView.ViewHolder {
         mLook = UIUtils.findView(itemView, R.id.tv_question_look);
     }
 
-    public void setData(QuestionBean question) {
+    public void setData(final QuestionBean question) {
         if (question == null) {
             return;
         }
@@ -59,14 +59,18 @@ public class QuestionListItemHolder extends RecyclerView.ViewHolder {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemView.getContext().startActivity(new Intent(itemView.getContext(), QuestionDetailActivity.class));
+                Intent intent = new Intent(itemView.getContext(), QuestionDetailActivity.class);
+                intent.putExtra(QuestionDetailActivity.DETAIL_ID, question.id);
+                itemView.getContext().startActivity(intent);
             }
         });
 
         mLook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemView.getContext().startActivity(new Intent(itemView.getContext(), QuestionDetailActivity.class));
+                Intent intent = new Intent(itemView.getContext(), QuestionDetailActivity.class);
+                intent.putExtra(QuestionDetailActivity.DETAIL_ID, question.id);
+                itemView.getContext().startActivity(intent);
             }
         });
     }

@@ -30,6 +30,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.why.dianpin.util.Const.BASE_URL;
+
 /**
  * @author xiaoyueyue
  * @since 2018/5/14.
@@ -40,9 +42,6 @@ import okhttp3.Response;
  */
 
 public class HttpUtils {
-
-    public static final String HOST = "192.168.1.11";
-    public static final String BASE_URL = "http://" + HOST + ":8080/whyServlet/";
 
     /**
      * 懒汉 安全 加同步

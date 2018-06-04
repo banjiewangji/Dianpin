@@ -19,4 +19,10 @@ public class Const {
 	 * @since 3.3.0
 	 */
 	public static final float STROKE_WIDTH = 5F;
+
+	/**
+	 * 修改此处
+	 */
+	public static final String HOST = "192.168.1.17";
+	public static final String BASE_URL = "http://" + HOST + ":8080/whyServlet/";
 }

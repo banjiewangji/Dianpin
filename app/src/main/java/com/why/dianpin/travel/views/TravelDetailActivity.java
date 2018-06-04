@@ -15,6 +15,7 @@ import com.why.dianpin.travel.bean.TravelBean;
 import com.why.dianpin.travel.bean.TravelDetailHeaderBean;
 import com.why.dianpin.travel.bean.TravelDetailItemBean;
 import com.why.dianpin.util.HttpUtil;
+import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;

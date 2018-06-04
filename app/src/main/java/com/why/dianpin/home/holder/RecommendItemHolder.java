@@ -11,7 +11,6 @@ import com.why.dianpin.home.beans.Recommend;
 import com.why.dianpin.home.beans.RecommendItem;
 import com.why.dianpin.recommend.views.RecommendDetailActivity;
 import com.why.dianpin.recommend.views.RecommendListActivity;
-import com.why.dianpin.util.HttpUtil;
 
 import java.util.ArrayList;
 import java.util.List;

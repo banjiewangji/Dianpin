@@ -21,7 +21,7 @@ public class ImageUtils {
         Uri uri = Uri.parse(imageUrl);
         String host = uri.getHost();
 
-        Glide.with(context).load(uri.toString().replace(host, HttpUtil.HOST)).into(imageView);
+        Glide.with(context).load(uri.toString().replace(host, Const.HOST)).into(imageView);
     }
 
 }

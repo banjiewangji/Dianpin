@@ -9,10 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.why.dianpin.R;
-import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.scenic.adapter.ScenicListAdapter;
 import com.why.dianpin.scenic.bean.ScenicListBean;
-import com.why.dianpin.util.HttpUtil;
 import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
@@ -23,7 +21,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author xiaoyueyue

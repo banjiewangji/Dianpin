@@ -20,16 +20,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+import static com.why.dianpin.util.Const.BASE_URL;
+
 /**
  * @author xiaoyueyue
  * @since 2018/5/3.
  */
 
 public class HttpUtil {
-
-
-    public static final String HOST = "192.168.1.11";
-    public static final String BASE_URL = "http://" + HOST + ":8080/whyServlet/";
 
     private Novate.Builder mBuilder;
 

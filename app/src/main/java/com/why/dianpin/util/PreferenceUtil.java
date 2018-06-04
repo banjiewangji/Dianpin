@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.why.dianpin.MyApplication;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/1.
  */
 

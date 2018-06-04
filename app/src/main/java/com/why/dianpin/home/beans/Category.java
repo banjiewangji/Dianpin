@@ -3,7 +3,7 @@ package com.why.dianpin.home.beans;
 import android.graphics.drawable.Drawable;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/4/1.
  */
 

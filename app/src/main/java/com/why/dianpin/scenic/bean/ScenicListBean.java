@@ -3,7 +3,7 @@ package com.why.dianpin.scenic.bean;
 import org.json.JSONObject;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/7.
  */
 

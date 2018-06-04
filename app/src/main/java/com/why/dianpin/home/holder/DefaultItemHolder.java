@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import com.why.dianpin.home.beans.IMainListItem;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/4/1.
  */
 

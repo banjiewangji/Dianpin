@@ -6,7 +6,7 @@ import android.widget.Toast;
 import com.why.dianpin.MyApplication;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/6.
  */
 

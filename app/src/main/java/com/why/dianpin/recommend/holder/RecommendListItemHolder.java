@@ -15,7 +15,7 @@ import com.why.dianpin.util.UIUtils;
 import java.text.DecimalFormat;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/7.
  */
 

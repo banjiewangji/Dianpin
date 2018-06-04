@@ -20,7 +20,7 @@ import com.why.dianpin.util.view.BaseActivity;
 import org.json.JSONObject;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/6.
  */
 

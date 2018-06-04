@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import org.json.JSONObject;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/6.
  */
 

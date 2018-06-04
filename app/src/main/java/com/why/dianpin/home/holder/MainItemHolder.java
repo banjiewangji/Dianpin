@@ -13,7 +13,7 @@ import com.why.dianpin.home.beans.IMainListItem;
 import com.why.dianpin.home.listener.MainItemClickListener;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/4/1.
  */
 

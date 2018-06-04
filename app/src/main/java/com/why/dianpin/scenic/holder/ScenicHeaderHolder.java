@@ -13,7 +13,7 @@ import com.why.dianpin.util.ImageUtils;
 import com.why.dianpin.util.UIUtils;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/10.
  */
 

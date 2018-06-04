@@ -113,6 +113,11 @@
             android:name=".question.views.AddQuestionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+        <!-- 回答问题 -->
+        <activity
+            android:name=".question.views.AddAnswerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
 
     </application>
 

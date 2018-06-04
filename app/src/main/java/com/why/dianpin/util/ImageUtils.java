@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/13.
  */
 

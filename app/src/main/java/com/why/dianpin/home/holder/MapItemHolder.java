@@ -13,7 +13,7 @@ import com.why.dianpin.location.LocationManager;
 import com.why.dianpin.util.view.StatusFrameLayout;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/4/17.
  */
 

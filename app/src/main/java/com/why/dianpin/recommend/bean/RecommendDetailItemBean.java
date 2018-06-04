@@ -3,7 +3,7 @@ package com.why.dianpin.recommend.bean;
 import com.why.dianpin.travel.bean.IDetailBean;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/10.
  */
 

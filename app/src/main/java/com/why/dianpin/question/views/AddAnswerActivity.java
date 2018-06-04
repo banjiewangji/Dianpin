@@ -2,7 +2,6 @@ package com.why.dianpin.question.views;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -12,17 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.why.dianpin.R;
-import com.why.dianpin.question.adapter.QuestionDetailAdapter;
-import com.why.dianpin.question.bean.AnswerBean;
-import com.why.dianpin.question.bean.QuestionBean;
-import com.why.dianpin.question.bean.QuestionDetailItemBean;
-import com.why.dianpin.question.bean.QuestionDetailQuestionBean;
-import com.why.dianpin.question.bean.QuestionDetailTipsBean;
 import com.why.dianpin.scenic.bean.ScenicDetailHeaderBean;
 import com.why.dianpin.scenic.bean.ScenicDetailItemBean;
 import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.travel.bean.IDetailBean;
-import com.why.dianpin.user.bean.UserBean;
 import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
@@ -41,7 +33,7 @@ import java.util.List;
  * @since 2018/5/7.
  */
 
-public class AddQuestionActivity extends BaseActivity {
+public class AddAnswerActivity extends BaseActivity {
 
     public static final String DETAIL_ID = "detail_id";
 
@@ -52,7 +44,7 @@ public class AddQuestionActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.layout_add_question);
+        setContentView(R.layout.layout_add_answer);
 
         initViews();
         initEvent();
@@ -127,9 +119,9 @@ public class AddQuestionActivity extends BaseActivity {
     }
 
     private static class AddTextWatcher implements TextWatcher {
-        private WeakReference<AddQuestionActivity> mFragment;
+        private WeakReference<AddAnswerActivity> mFragment;
 
-        public AddTextWatcher(AddQuestionActivity step2Fragment) {
+        public AddTextWatcher(AddAnswerActivity step2Fragment) {
             mFragment = new WeakReference<>(step2Fragment);
         }
 
@@ -145,7 +137,7 @@ public class AddQuestionActivity extends BaseActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            AddQuestionActivity step2 = mFragment.get();
+            AddAnswerActivity step2 = mFragment.get();
             if (step2 == null) return;
             step2.updateBtn();
         }

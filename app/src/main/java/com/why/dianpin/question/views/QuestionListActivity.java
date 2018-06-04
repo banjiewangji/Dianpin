@@ -22,7 +22,7 @@ import com.why.dianpin.util.view.BaseActivity;
 import java.util.ArrayList;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/7.
  */
 

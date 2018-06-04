@@ -3,7 +3,7 @@ package com.why.dianpin.question.bean;
 import com.why.dianpin.user.bean.UserBean;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/14.
  */
 

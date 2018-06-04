@@ -5,7 +5,7 @@ import com.why.dianpin.user.bean.UserBean;
 import java.util.List;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/14.
  */
 

@@ -24,7 +24,7 @@ import com.why.dianpin.util.view.BaseActivity;
 import com.why.dianpin.R;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/4/18.
  */
 

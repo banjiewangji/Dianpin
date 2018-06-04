@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/4/1.
  */
 

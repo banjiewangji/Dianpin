@@ -4,7 +4,7 @@ import com.why.dianpin.travel.bean.IDetailBean;
 import com.why.dianpin.travel.bean.TravelBean;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/10.
  */
 

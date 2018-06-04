@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import com.why.dianpin.R;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/7.
  */
 

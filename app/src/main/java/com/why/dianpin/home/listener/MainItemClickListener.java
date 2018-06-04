@@ -1,7 +1,7 @@
 package com.why.dianpin.home.listener;
 
 /**
- * @author shidefeng
+ * @author xiaoyueyue
  * @since 2018/5/10.
  */
 

@@ -29,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import static com.why.dianpin.util.Const.BASE_URL;
 
@@ -178,11 +179,12 @@ public class HttpUtils {
                     return;
                 }
 
-                String json = response.body().string();
+                ResponseBody responseBodyCopy = response.peekBody(Long.MAX_VALUE);
+                String json = responseBodyCopy.string();
 
-                int en = 0;
-                String em = "";
-                JSONObject data = null;
+                int en;
+                String em;
+                JSONObject data;
                 try {
                     JSONObject j = new JSONObject(json);
                     en = j.optInt("en");
@@ -190,6 +192,7 @@ public class HttpUtils {
                     data = j.optJSONObject("data");
                 } catch (JSONException e) {
                     postOnFailure(e, callback);
+                    return;
                 }
                 if (en == 200) {
                     postOnSuccess(data, callback);

@@ -1,5 +1,6 @@
 package com.why.dianpin.question.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +46,7 @@ public class QuestionDetailActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private TextView mAnswerQuestion;
     private QuestionDetailAdapter mAdapter;
+    private int mQuestionId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +56,11 @@ public class QuestionDetailActivity extends BaseActivity {
 
         initViews();
         initEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 //        refreshData();
         initData();
     }
@@ -75,6 +82,8 @@ public class QuestionDetailActivity extends BaseActivity {
             }
         });
 
+        mQuestionId = getIntent().getIntExtra(DETAIL_ID, 0);
+
         mAdapter = new QuestionDetailAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
@@ -82,14 +91,16 @@ public class QuestionDetailActivity extends BaseActivity {
         mAnswerQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent it = new Intent(QuestionDetailActivity.this, AddAnswerActivity.class);
+                it.putExtra(AddAnswerActivity.QUESTION_ID, mQuestionId);
+                QuestionDetailActivity.this.startActivity(it);
             }
         });
     }
 
     private void initData() {
         HashMap<String, String> params = new HashMap<>();
-        params.put("questionId", getIntent().getIntExtra(DETAIL_ID, 0) + "");
+        params.put("questionId",mQuestionId + "");
         HttpUtils.doPost("question/getQuestionDetail", params, new HttpUtils.HttpCallback() {
             @Override
             public void onSuccess(JSONObject result) {

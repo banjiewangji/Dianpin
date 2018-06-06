@@ -61,9 +61,20 @@ public class QuestionItemHolder extends MainItemHolder<QuestionItem> {
             return;
         }
 
-        int count = Math.min(travels.size(), mHolders.size());
-        for (int i = 0; i < count; i++) {
-            mHolders.get(i).setData(travels.get(i));
+        final int beanSize = travels.size();
+        final int viewSize = mHolders.size();
+
+        final int min = Math.min(beanSize, viewSize);
+        final int max = Math.max(beanSize, viewSize);
+
+        for (int i = 0; i < max; i++) {
+            if (i < min) {
+                mHolders.get(i).setData(travels.get(i));
+            } else {
+                if (i < viewSize) {
+                    mHolders.get(i).setData(null);
+                }
+            }
         }
     }
 }

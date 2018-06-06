@@ -121,6 +121,9 @@ public class MainActivity extends BaseActivity {
                 for (int i = 0, len = mainList.length(); i < len; i++) {
                     beans.add(IMainListItem.fromJson(mainList.optJSONObject(i)));
                 }
+
+                generateCategory(beans);
+
                 if (mListAdapter != null) {
                     mListAdapter.setData(beans);
                 }
@@ -133,6 +136,41 @@ public class MainActivity extends BaseActivity {
         });
 
         checkLogin();
+    }
+
+    private void generateCategory(ArrayList<IMainListItem> list) {
+        if (list == null || list.size() <= 0) {
+            return;
+        }
+        final CategoryItem categoryItem = new CategoryItem();
+        categoryItem.categories = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            final Category category = getCategory(list.get(i));
+            if (category != null) {
+                categoryItem.categories.add(category);
+            }
+        }
+        list.add(0, categoryItem);
+    }
+
+    private Category getCategory(IMainListItem item) {
+        if (item == null) {
+            return null;
+        }
+        switch (item.getItemType()) {
+            case IMainListItem.TYPE_RECOMMEND:
+                return new Category(Category.TYPE_RECOMMEND, R.drawable.vector_hotel, 0xFFFF3030, "出行推荐");
+            case IMainListItem.TYPE_SCENIC:
+                return new Category(Category.TYPE_SCENIC, R.drawable.vector_scenic, 0xFF33CCFF, "景点");
+            case IMainListItem.TYPE_TRAVELS:
+                return new Category(Category.TYPE_TRAVEL, R.drawable.vector_plane, 0xFF7CCD7C, "游记");
+            case IMainListItem.TYPE_MAP:
+                return new Category(Category.TYPE_MAP, R.drawable.vector_location_white, 0xFFF4A460, "地图");
+            case IMainListItem.TYPE_QUESTION:
+                return new Category(Category.TYPE_QUESTION, R.drawable.vector_question, 0xFFFFB90F, "问答");
+            default:
+                return null;
+        }
     }
 
     @Override
@@ -169,7 +207,6 @@ public class MainActivity extends BaseActivity {
             quitMenu.setVisible(isLogin);
         }
     }
-
 
 
 //    private ScenicItem getScenicItem() {

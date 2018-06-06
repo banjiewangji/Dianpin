@@ -46,9 +46,10 @@ public class QuestionListItemHolder extends RecyclerView.ViewHolder {
 
     public void setData(final QuestionBean question) {
         if (question == null) {
+            itemView.setVisibility(View.GONE);
             return;
         }
-
+        itemView.setVisibility(View.VISIBLE);
         mQuestion.setText(question.question);
         if (question.answers != null && question.answers.size() > 0) {
             mAnswer.setText(question.answers.get(0).content);

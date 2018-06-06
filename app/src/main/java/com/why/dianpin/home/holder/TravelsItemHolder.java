@@ -59,9 +59,20 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
             return;
         }
 
-        int count = Math.min(travels.size(), mHolders.size());
-        for (int i = 0; i < count; i++) {
-            mHolders.get(i).setData(travels.get(i));
+        final int beanSize = travels.size();
+        final int viewSize = mHolders.size();
+
+        final int min = Math.min(beanSize, viewSize);
+        final int max = Math.max(beanSize, viewSize);
+
+        for (int i = 0; i < max; i++) {
+            if (i < min) {
+                mHolders.get(i).setData(travels.get(i));
+            } else {
+                if (i < viewSize) {
+                    mHolders.get(i).setData(null);
+                }
+            }
         }
     }
 
@@ -82,11 +93,12 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
             mDesc = findView(itemView, R.id.tv_travels_description);
         }
 
-        private void setData(TravelBean travels) {
+        private void setData(final TravelBean travels) {
             if (travels == null) {
+                itemView.setVisibility(View.GONE);
                 return;
             }
-
+            itemView.setVisibility(View.VISIBLE);
             ImageUtils.loadImage(itemView.getContext(), travels.imageUrl, mImage);
             mContent.setText(travels.title);
             String text = dataFormat(travels.beginTime) + "出游  " + travels.team + "  行程" + travels.duration + "天";
@@ -95,7 +107,9 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemView.getContext().startActivity(new Intent(itemView.getContext(), TravelDetailActivity.class));
+                    final Intent intent = new Intent(itemView.getContext(), TravelDetailActivity.class);
+                    intent.putExtra(TravelDetailActivity.DETAIL_ID, travels.id);
+                    itemView.getContext().startActivity(intent);
                 }
             });
         }

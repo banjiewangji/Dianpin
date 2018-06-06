@@ -2,7 +2,9 @@ package com.why.dianpin.home.holder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,7 +103,7 @@ public class CategoryItemHolder extends MainItemHolder<CategoryItem> {
             final Category cate = mData.get(position);
             holder.title.setText(cate.title);
 
-            holder.icon.setImageDrawable(cate.icon);
+            holder.icon.setImageDrawable(getIcon(cate.icon));
 
             GradientDrawable bg = (GradientDrawable) holder.icon.getBackground();
             bg = (GradientDrawable) bg.mutate();
@@ -135,6 +137,10 @@ public class CategoryItemHolder extends MainItemHolder<CategoryItem> {
             });
 
             return convertView;
+        }
+
+        private Drawable getIcon(int id) {
+            return VectorDrawableCompat.create(mContext.getResources(), id, mContext.getTheme());
         }
     }
 

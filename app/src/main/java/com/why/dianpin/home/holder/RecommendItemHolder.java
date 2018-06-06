@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.why.dianpin.R;
 import com.why.dianpin.home.beans.Recommend;
 import com.why.dianpin.home.beans.RecommendItem;
+import com.why.dianpin.recommend.bean.RecommendListBean;
 import com.why.dianpin.recommend.views.RecommendDetailActivity;
 import com.why.dianpin.recommend.views.RecommendListActivity;
 
@@ -58,7 +59,7 @@ public class RecommendItemHolder extends MainItemHolder<RecommendItem> {
             }
         });
 
-        List<Recommend> recommends = data.recommends;
+        List<RecommendListBean> recommends = data.recommends;
         if (recommends == null || recommends.isEmpty()) {
             mContainer1.setVisibility(View.GONE);
             mContainer2.setVisibility(View.GONE);
@@ -78,14 +79,16 @@ public class RecommendItemHolder extends MainItemHolder<RecommendItem> {
 
         for (int i = 0; i < len; i++) {
             if (i < size) {
-                Recommend r = recommends.get(i);
+                final RecommendListBean r = recommends.get(i);
                 TextView item = mItemViews.get(i);
                 item.setVisibility(View.VISIBLE);
-                item.setText(r.content);
+                item.setText(r.title);
                 item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mContext.startActivity(new Intent(mContext, RecommendDetailActivity.class));
+                        Intent intent = new Intent(itemView.getContext(), RecommendDetailActivity.class);
+                        intent.putExtra(RecommendDetailActivity.DETAIL_ID, r.id);
+                        itemView.getContext().startActivity(intent);
                     }
                 });
             } else {

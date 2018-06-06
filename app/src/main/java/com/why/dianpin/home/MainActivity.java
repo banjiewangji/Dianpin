@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,12 +28,18 @@ import com.why.dianpin.home.beans.Travels;
 import com.why.dianpin.home.beans.TravelsItem;
 import com.why.dianpin.question.bean.AnswerBean;
 import com.why.dianpin.question.bean.QuestionBean;
+import com.why.dianpin.user.views.UserInfoActivity;
 import com.why.dianpin.user.views.UserLoginActivity;
 import com.why.dianpin.user.views.UserRegisterActivity;
+import com.why.dianpin.util.HttpUtils;
 import com.why.dianpin.util.LoginHelper;
 import com.why.dianpin.util.PreferenceUtil;
+import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.view.BaseActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -90,10 +97,10 @@ public class MainActivity extends BaseActivity {
                         startActivity(new Intent(MainActivity.this, UserLoginActivity.class));
                         break;
                     case R.id.register:
-                        startActivity(new Intent(MainActivity.this, UserRegisterActivity.class));
+                        startActivity(new Intent(MainActivity.this, UserInfoActivity.class));
                         break;
                     case R.id.profile:
-
+                        startActivity(new Intent(MainActivity.this, UserRegisterActivity.class));
                         break;
                     case R.id.quit:
                         PreferenceUtil.setValue(PreferenceUtil.KEY_USER, "");
@@ -106,16 +113,24 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initData() {
-        ArrayList<IMainListItem> items = new ArrayList<>();
+        HttpUtils.doPost("servlet/mainList", null, new HttpUtils.HttpCallback() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                final JSONArray mainList = result.optJSONArray("mainList");
+                final ArrayList<IMainListItem> beans = new ArrayList<>();
+                for (int i = 0, len = mainList.length(); i < len; i++) {
+                    beans.add(IMainListItem.fromJson(mainList.optJSONObject(i)));
+                }
+                if (mListAdapter != null) {
+                    mListAdapter.setData(beans);
+                }
+            }
 
-        items.add(getCategoryItem());
-        items.add(getRecommendItem());
-        items.add(getScenicItem());
-        items.add(getTravelsItem());
-        items.add(getMapItem());
-        items.add(getQuestionItem());
-
-        mListAdapter.setData(items);
+            @Override
+            public void onError(String message) {
+                Toaster.show(TextUtils.isEmpty(message) ? "获取列表失败" : message);
+            }
+        });
 
         checkLogin();
     }
@@ -155,88 +170,73 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private CategoryItem getCategoryItem() {
-        CategoryItem cateItem = new CategoryItem();
-        ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category(Category.TYPE_RECOMMEND, getIcon(R.drawable.vector_hotel), 0xFFFF3030, "出行推荐"));
-        categories.add(new Category(Category.TYPE_SCENIC, getIcon(R.drawable.vector_scenic), 0xFF33CCFF, "景点"));
-        categories.add(new Category(Category.TYPE_MAP, getIcon(R.drawable.vector_location_white), 0xFFF4A460, "地图"));
-        categories.add(new Category(Category.TYPE_TRAVEL, getIcon(R.drawable.vector_plane), 0xFF7CCD7C, "游记"));
-        categories.add(new Category(Category.TYPE_QUESTION, getIcon(R.drawable.vector_question), 0xFFFFB90F, "问答"));
-        categories.add(new Category(Category.TYPE_LIKE, getIcon(R.drawable.vector_nearby), 0xFF5CACEE, "猜你喜欢"));
-        cateItem.categories = categories;
-        return cateItem;
-    }
 
-    private ScenicItem getScenicItem() {
-        ScenicItem item = new ScenicItem();
-        ArrayList<Scenic> scenics = new ArrayList<>();
-        scenics.add(new Scenic(R.drawable.scenic_gugong, "故宮博物院"));
-        scenics.add(new Scenic(R.drawable.scenic_houhai, "后海"));
-        scenics.add(new Scenic(R.drawable.scenic_wangfujing, "王府井"));
-        scenics.add(new Scenic(R.drawable.scenic_tiantan, "天坛"));
-        scenics.add(new Scenic(R.drawable.scenic_gongwangfu, "恭王府"));
-        scenics.add(new Scenic(R.drawable.scenic_bowuguan, "博物馆"));
-        scenics.add(new Scenic(R.drawable.scenic_maozhuxi, "毛主席纪念馆"));
-        item.scenics = scenics;
-        return item;
-    }
 
-    private TravelsItem getTravelsItem() {
-        TravelsItem item = new TravelsItem();
-        ArrayList<Travels> travels = new ArrayList<>();
-        travels.add(new Travels(1, R.drawable.scenic_gugong, "故宮博分公司故宮博分公司让他发送给物院故宮博分公司让他发送给物院让他发送给物院", "2015年2月出游 小两口 行程4天"));
-        travels.add(new Travels(1, R.drawable.scenic_gugong, "故宮博分公司让他发送给物院", "2014年2月出游 和朋友 行程6天"));
-        travels.add(new Travels(1, R.drawable.scenic_gugong, "公司让他发送给物院", "2017年8月出游 家族出游 行程2天"));
-        item.travels = travels;
-        return item;
-    }
+//    private ScenicItem getScenicItem() {
+//        ScenicItem item = new ScenicItem();
+//        ArrayList<Scenic> scenics = new ArrayList<>();
+//        scenics.add(new Scenic(R.drawable.scenic_gugong, "故宮博物院"));
+//        scenics.add(new Scenic(R.drawable.scenic_houhai, "后海"));
+//        scenics.add(new Scenic(R.drawable.scenic_wangfujing, "王府井"));
+//        scenics.add(new Scenic(R.drawable.scenic_tiantan, "天坛"));
+//        scenics.add(new Scenic(R.drawable.scenic_gongwangfu, "恭王府"));
+//        scenics.add(new Scenic(R.drawable.scenic_bowuguan, "博物馆"));
+//        scenics.add(new Scenic(R.drawable.scenic_maozhuxi, "毛主席纪念馆"));
+//        item.scenics = scenics;
+//        return item;
+//    }
 
-    private RecommendItem getRecommendItem() {
-        RecommendItem item = new RecommendItem();
-        ArrayList<Recommend> travels = new ArrayList<>();
-        travels.add(new Recommend("防坑宝典"));
-        travels.add(new Recommend("北京必体验"));
-//        travels.add(new Recommend("最佳旅行时间"));
-//        travels.add(new Recommend("北京当地特产"));
-        travels.add(new Recommend("旅行路线推荐"));
-        travels.add(new Recommend("北京特色美食"));
-        item.recommends = travels;
-        return item;
-    }
+//    private TravelsItem getTravelsItem() {
+//        TravelsItem item = new TravelsItem();
+//        ArrayList<Travels> travels = new ArrayList<>();
+//        travels.add(new Travels(1, R.drawable.scenic_gugong, "故宮博分公司故宮博分公司让他发送给物院故宮博分公司让他发送给物院让他发送给物院", "2015年2月出游 小两口 行程4天"));
+//        travels.add(new Travels(1, R.drawable.scenic_gugong, "故宮博分公司让他发送给物院", "2014年2月出游 和朋友 行程6天"));
+//        travels.add(new Travels(1, R.drawable.scenic_gugong, "公司让他发送给物院", "2017年8月出游 家族出游 行程2天"));
+//        item.travels = travels;
+//        return item;
+//    }
+//
+//    private RecommendItem getRecommendItem() {
+//        RecommendItem item = new RecommendItem();
+//        ArrayList<Recommend> travels = new ArrayList<>();
+//        travels.add(new Recommend("防坑宝典"));
+//        travels.add(new Recommend("北京必体验"));
+////        travels.add(new Recommend("最佳旅行时间"));
+////        travels.add(new Recommend("北京当地特产"));
+//        travels.add(new Recommend("旅行路线推荐"));
+//        travels.add(new Recommend("北京特色美食"));
+//        item.recommends = travels;
+//        return item;
+//    }
 
-    private MapItem getMapItem() {
-        MapItem mapItem = new MapItem();
-        return mapItem;
-    }
+//    private MapItem getMapItem() {
+//        MapItem mapItem = new MapItem();
+//        return mapItem;
+//    }
 
-    private QuestionItem getQuestionItem() {
-        final QuestionItem item = new QuestionItem();
+//    private QuestionItem getQuestionItem() {
+//        final QuestionItem item = new QuestionItem();
+//
+//        item.questions = new ArrayList<>();
+//
+//        item.questions.add(getQuestionBean());
+//        item.questions.add(getQuestionBean());
+//        item.questions.add(getQuestionBean());
+//
+//        return item;
+//
+//    }
 
-        item.questions = new ArrayList<>();
-
-        item.questions.add(getQuestionBean());
-        item.questions.add(getQuestionBean());
-        item.questions.add(getQuestionBean());
-
-        return item;
-
-    }
-
-    @NonNull
-    private QuestionBean getQuestionBean() {
-        final QuestionBean question = new QuestionBean();
-        question.timestamp = System.currentTimeMillis();
-        question.question = "北京菜什么味道，南方人吃得惯吗";
-        question.answers = new ArrayList<>();
-        question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis(), null));
-        question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis(), null));
-        return question;
-    }
-
-    private Drawable getIcon(int id) {
-        return VectorDrawableCompat.create(getResources(), id, getTheme());
-    }
+//    @NonNull
+//    private QuestionBean getQuestionBean() {
+//        final QuestionBean question = new QuestionBean();
+//        question.timestamp = System.currentTimeMillis();
+//        question.question = "北京菜什么味道，南方人吃得惯吗";
+//        question.answers = new ArrayList<>();
+//        question.answers.add(new AnswerBean(0, "还行吧", System.currentTimeMillis(), null));
+//        question.answers.add(new AnswerBean(1, "哈哈哈，一点也不好吃", System.currentTimeMillis(), null));
+//        return question;
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

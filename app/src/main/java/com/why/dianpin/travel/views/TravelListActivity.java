@@ -57,7 +57,7 @@ public class TravelListActivity extends BaseActivity {
         ToolbarHelper toolbarHelper = new ToolbarHelper((Toolbar) findViewById(R.id.tool_bar));
         toolbarHelper.setTitle("游记");
         toolbarHelper.setBackgroundColorRes(R.color.colorPrimary);
-        toolbarHelper.addRightMenu(R.id.menu_travel_publish_id, "", R.drawable.ic_add);
+//        toolbarHelper.addRightMenu(R.id.menu_travel_publish_id, "", R.drawable.ic_add);
         toolbarHelper.setNavigation(R.drawable.ic_arrow_back, new View.OnClickListener() {
 
             @Override
@@ -66,15 +66,15 @@ public class TravelListActivity extends BaseActivity {
             }
         });
 
-        toolbarHelper.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.menu_travel_publish_id) {
-                    Toaster.show("fucker");
-                }
-                return false;
-            }
-        });
+//        toolbarHelper.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                if (item.getItemId() == R.id.menu_travel_publish_id) {
+//                    Toaster.show("网络连接有误");
+//                }
+//                return false;
+//            }
+//        });
 
         mAdapter = new TravelListAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

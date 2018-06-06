@@ -23,6 +23,7 @@ import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.travel.bean.IDetailBean;
 import com.why.dianpin.user.bean.UserBean;
 import com.why.dianpin.util.HttpUtils;
+import com.why.dianpin.util.LoginHelper;
 import com.why.dianpin.util.Toaster;
 import com.why.dianpin.util.ToolbarHelper;
 import com.why.dianpin.util.UIUtils;
@@ -91,11 +92,19 @@ public class QuestionDetailActivity extends BaseActivity {
         mAnswerQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(QuestionDetailActivity.this, AddAnswerActivity.class);
-                it.putExtra(AddAnswerActivity.QUESTION_ID, mQuestionId);
-                QuestionDetailActivity.this.startActivity(it);
+                if (LoginHelper.isLogin()) {
+                    gotoAddAnswerActivity();
+                } else {
+                    LoginHelper.showLoginDialog(QuestionDetailActivity.this);
+                }
             }
         });
+    }
+
+    private void gotoAddAnswerActivity() {
+        Intent it = new Intent(QuestionDetailActivity.this, AddAnswerActivity.class);
+        it.putExtra(AddAnswerActivity.QUESTION_ID, mQuestionId);
+        QuestionDetailActivity.this.startActivity(it);
     }
 
     private void initData() {

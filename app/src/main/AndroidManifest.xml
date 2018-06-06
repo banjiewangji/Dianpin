@@ -59,6 +59,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
+        <!-- 用户资料 -->
+        <activity
+            android:name=".user.views.UserInfoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".location.LocationActivity"

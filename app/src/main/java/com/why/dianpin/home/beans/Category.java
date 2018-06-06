@@ -1,6 +1,7 @@
 package com.why.dianpin.home.beans;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 
 /**
  * @author xiaoyueyue
@@ -17,11 +18,11 @@ public class Category {
     public static final int TYPE_LIKE = 6;
 
     public int type;
-    public Drawable icon;
+    public int icon;
     public int bgColor;
     public String title;
 
-    public Category(int type, Drawable icon, int bgColor, String title) {
+    public Category(int type, @DrawableRes int icon, int bgColor, String title) {
         this.type = type;
         this.icon = icon;
         this.bgColor = bgColor;

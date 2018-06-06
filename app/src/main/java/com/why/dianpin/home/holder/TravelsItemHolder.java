@@ -8,13 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.why.dianpin.R;
-import com.why.dianpin.home.beans.Travels;
 import com.why.dianpin.home.beans.TravelsItem;
-import com.why.dianpin.home.listener.MainItemClickListener;
+import com.why.dianpin.travel.bean.TravelBean;
 import com.why.dianpin.travel.views.TravelDetailActivity;
 import com.why.dianpin.travel.views.TravelListActivity;
+import com.why.dianpin.util.ImageUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,7 +54,7 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
             }
         });
 
-        List<Travels> travels = data.travels;
+        List<TravelBean> travels = data.travels;
         if (travels == null || travels.isEmpty()) {
             return;
         }
@@ -79,14 +82,15 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
             mDesc = findView(itemView, R.id.tv_travels_description);
         }
 
-        private void setData(Travels travels) {
+        private void setData(TravelBean travels) {
             if (travels == null) {
                 return;
             }
 
-            mImage.setImageResource(travels.image);
-            mContent.setText(travels.content);
-            mDesc.setText(travels.desc);
+            ImageUtils.loadImage(itemView.getContext(), travels.imageUrl, mImage);
+            mContent.setText(travels.title);
+            String text = dataFormat(travels.beginTime) + "出游  " + travels.team + "  行程" + travels.duration + "天";
+            mDesc.setText(text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,6 +98,11 @@ public class TravelsItemHolder extends MainItemHolder<TravelsItem> {
                     itemView.getContext().startActivity(new Intent(itemView.getContext(), TravelDetailActivity.class));
                 }
             });
+        }
+
+        private String dataFormat(long timestamp) {
+            final DateFormat format = new SimpleDateFormat("yyyy年MM月dd日");
+            return format.format(new Date(timestamp));
         }
     }
 }

@@ -23,6 +23,6 @@ public class Const {
 	/**
 	 * 修改此处
 	 */
-	public static final String HOST = "192.168.1.17";
+	public static final String HOST = "172.16.139.84";
 	public static final String BASE_URL = "http://" + HOST + ":8080/whyServlet/";
 }

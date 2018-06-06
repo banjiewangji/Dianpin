@@ -11,10 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.why.dianpin.R;
-import com.why.dianpin.home.beans.Scenic;
 import com.why.dianpin.home.beans.ScenicItem;
+import com.why.dianpin.scenic.bean.ScenicListBean;
 import com.why.dianpin.scenic.views.ScenicDetailActivity;
 import com.why.dianpin.scenic.views.ScenicListActivity;
+import com.why.dianpin.util.ImageUtils;
 
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class ScenicItemHolder extends MainItemHolder<ScenicItem> implements View
                 @Override
                 public void onClick(View v) {
                     int position = (int) v.getTag(R.id.scenic_item_position);
-                    List<Scenic> scenics = data.scenics;
+                    List<ScenicListBean> scenics = data.scenics;
                     if (scenics != null && !scenics.isEmpty()) {
                         scenics.get(position);
                         Intent it = new Intent(mContext, ScenicDetailActivity.class);
@@ -81,12 +82,12 @@ public class ScenicItemHolder extends MainItemHolder<ScenicItem> implements View
             TextView mTips = findView(convertView, R.id.item_scenic_tips);
             TextView mTitle = findView(convertView, R.id.item_scenic_title);
 
-            final Scenic scenic = data.scenics.get(i);
+            final ScenicListBean scenic = data.scenics.get(i);
 
             if (scenic == null) {
                 return;
             }
-            mImage.setImageResource(scenic.icon);
+            ImageUtils.loadImage(mContext, scenic.imageUrl, mImage);
             mTitle.setText(scenic.title);
 
             if (i < 3) {
